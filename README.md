@@ -2,6 +2,10 @@
 
 The NSW Rural Fire Service (RFS) [publishes a GeoJSON feed of major incidents](http://www.rfs.nsw.gov.au/news-and-media/stay-up-to-date/feeds), this project aims to make that feed more developer friendly.
 
+You can either build application into your own pipeline or use the hosted URL at https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson (no service availability guarantees!).
+
+_NSW RFS Current Incidents are © State of New South Wales (NSW Rural Fire Service). For current information go to www.rfs.nsw.gov.au. Licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)._
+
 # Where is it used?
 
 This pipeline has been built for [www.beyondtracks.com](https://www.beyondtracks.com) to provide information about bush fires nearby bushwalks.
