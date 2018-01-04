@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const request = require('request');
+const NSWRFSMajorIncidentsGeoJSON = require('../');
+
+if (process.argv.length < 3) {
+    throw 'Usage: nsw-rfs-majorincidents-geojson <nsw-rfs-majorincidents.geojson>';
+    process.exit(1);
+}
+const upstreamFeedURL = 'https://www.rfs.nsw.gov.au/feeds/majorIncidents.json';
+const outputFile = process.argv[2];
+
+request(upstreamFeedURL, function (err, res, body) {
+
+    // check for any errors in the HTTP request
+    if (err || !res || res.statusCode !== 200) {
+        if (err) console.error(err);
+        if (res) console.error('Status Code: ' + res.statusCode);
+        throw 'Error retrieving feed';
+        process.exit(1);
+    }
+
+    // parse the upstream GeoJSON
+    var geojson;
+    try {
+        geojson = JSON.parse(body);
+    } catch (Error) {
+        throw 'Error parsing JSON response body';
+        process.exit(1);
+    }
+
+    // clean the GeoJSON feed
+    var cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(geojson)
+
+    // save cleaned GeoJSON to a file
+    fs.writeFileSync(outputFile, JSON.stringify(cleanedGeoJSON), 'utf8');
+});

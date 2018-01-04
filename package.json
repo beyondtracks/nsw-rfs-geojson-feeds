@@ -1,0 +1,26 @@
+{
+  "name": "nsw-rfs-majorincidents-geojson",
+  "version": "1.0.0",
+  "description": "Developer friendly NSW RFS Major Incidents GeoJSON Feed",
+  "main": "index.js",
+  "author": "Andrew Harvey <andrew@alantgeo.com.au>",
+  "license": "MIT",
+  "repository": "github:beyondtracks/nsw-rfs-majorincidents-geojson",
+  "scripts": {
+    "test": "tap test.js",
+    "geojsonhint": "./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson; geojsonhint < nsw-rfs-majorincidents.geojson"
+  },
+  "dependencies": {
+    "@turf/helpers": "^5.1.5",
+    "@turf/meta": "^5.2.0",
+    "geojson-precision": "^0.4.0",
+    "geojson-rewind": "^0.3.0",
+    "lodash": "^4.17.4",
+    "moment-timezone": "^0.5.14",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "@mapbox/geojsonhint": "^2.0.1",
+    "tap": "^11.0.1"
+  }
+}
