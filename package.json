@@ -1,5 +1,5 @@
 {
-  "name": "nsw-rfs-majorincidents-geojson",
+  "name": "@beyondtracks/nsw-rfs-majorincidents-geojson",
   "version": "1.0.0",
   "description": "Developer friendly NSW RFS Major Incidents GeoJSON Feed",
   "main": "index.js",
