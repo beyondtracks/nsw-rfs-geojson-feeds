@@ -19,7 +19,7 @@ module.exports = {
      *   - Enforce GeoJSON winding order
      *
      * @param {Object} geojson NSW RFS Major Incidents Upstream Feed as a GeoJSON Object
-     * @return {String
+     * @returns {Object} The "cleaned" GeoJSON Object
      */
     clean: function(geojson) {
         var self = this;
