@@ -39,6 +39,18 @@ The upstream feed uses dates in the format `3/01/2018 5:20:00 AM` and also `3 Ja
 
 For extra assurances the GeoJSON winding order is enforced with https://github.com/mapbox/geojson-rewind.
 
+# Usage
+
+Install the Node dependencies with:
+
+    yarn install
+
+Run the script with:
+
+    ./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson
+
+This will download the upstream feed, process it and save the resulting GeoJSON file at `nsw-rfs-majorincidents.geojson`.
+
 # Warranty
 
 The information in the RFS feed can affect life and property. Although the aim of this project is to make the RFS feed more safe, usable and reliable for data consumers, errors or omissions may be present and/or the upstream supplied data structure may change without any notice causing issues. Use at your own risk.
