@@ -31,9 +31,9 @@ Although extra coordinate precision can help retain geometry shape even beyond t
 
 The upstream feed overloads properties into the `description` field in a format like `KEY: Value <br />KEY: Value`. These are exploded out to make them easier to read in applications. The original overloaded description is dropped from the output.
 
-## Machine Readable Tags with Documented Schema
+## Machine readable schema
 
-This process slightly changes the schema making some tags more machine readable. The schema is fully documented below.
+Within [schema/](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson/tree/master/schema) are JSON files containing the values and descriptions for Status, Alert Level and Incident Type. These can be used within web applications to provide users more information about what these terms mean.
 
 ## ISO8601 Datetimes
 
@@ -62,35 +62,55 @@ Each feature has a properties field as follows. Note that these vary from the up
 
 Key   | Type | Description | Example
 ------|------|-------------|---------
-title | String | A short name used as the tile of this incident. Usually this is the name of a nearby road or geographic feature. | `Grain Valley Rd, Boggabri`
-alert-level | String | Alert level of the incident, see #alert-level | `emergency-warning`, `watch-and-act`, `advice`, 'not-applicable`
-status | String | Status of the incident, see #status | `out-of-control`, `being-controlled`, 'under-control'
+title | String | A short name used as the tile of this incident, given to assist with managing multiple incidents. Usually this is the name of a nearby road or geographic feature but it doesn't necessarily reflect the exact location of that incident. | `Grain Valley Rd, Boggabri`
+alert-level | String | Alert level of the incident, see [#alert-level](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#alert-level) | `emergency-warning`, `watch-and-act`, `advice`, 'not-applicable`
+status | String | Status of the incident, see [#status](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#status) | `out-of-control`, `being-controlled`, 'under-control'
 guid | String | A globally unique identifier for this incident. Usually it is a non-publicly accessible URL | `https://incidents.rfs.nsw.gov.au/api/v1/incidents/285935`
 pub-date | String | Datetime in ISO8601 of when the incident was first published | `2018-01-05T23:41:00+11:00`
 updated | String | Datetime in ISO8601 of when the incident details were last updated | `2018-01-06T10:41:00+11:00`
 responsible-agency | String | The name of the agency responsible for responding to the incident | `Rural Fire Service`, `NSW National Parks and Wildlife Service`.
 size | String | The ground area which the incident affects | `2790 ha`
-type | String | The type of incident | `bush-fire`, `medical`, `grass-fire`
+type | String | The type of incident, see [#incident-type](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#incident-type) | `bush-fire`, `medical`, `grass-fire`
 fire | boolean | Indicates if this this incident a fire (`true`) or not (`false`) | `true`, `false`
 council-area | String | Short name of the council area the incident falls in | `Wollongong`
 location | String | A description of the location of the incident | `Coast Trk, Lilyvale, NSW 2508`, `150.79 -33.30`
 
 ## Status
 
-Status Name | Status Identifier | Description
-------------|-------------------|------------
-Out of Control | `out-of-control` | A fire which is spreading on one or more fronts. Effective containment strategies are not in place for the entire perimeter.
-Being Controlled | `being-controlled` | Effective strategies are in operation or planned for the entire perimeter.
-Under Control | `under-control` | The fire is at a stage where fire fighting resources are only required for patrol purposes and major re-ignition is unlikely.
+Status Name | Description
+------------|-------------
+Out of Control | A fire which is spreading on one or more fronts. Effective containment strategies are not in place for the entire perimeter.
+Being Controlled | Effective strategies are in operation or planned for the entire perimeter.
+Under Control | The fire is at a stage where fire fighting resources are only required for patrol purposes and major re-ignition is unlikely.
 
 ## Alert Level
 
-Alert Level Name | Alert Level Identifier | Description
------------------|------------------------|-------------
-Emergency Warning| emergency-warning      | An Emergency Warning is the highest level of Bush Fire Alert. You may be in danger and need to take action immediately. Any delay now puts your life at risk.
-Watch and Act    | watch-and-act          | There is a heightened level of threat. Conditions are changing and you need to start taking action now to protect you and your family.
-Advice           | advice                 | A fire has started. There is no immediate danger. Stay up to date in case the situation changes.
-Not Applicable   | not-applicable         |
+Alert Level Name | Description
+-----------------|-------------
+Emergency Warning| An Emergency Warning is the highest level of Bush Fire Alert. You may be in danger and need to take action immediately. Any delay now puts your life at risk.
+Watch and Act    | There is a heightened level of threat. Conditions are changing and you need to start taking action now to protect you and your family.
+Advice           | A fire has started. There is no immediate danger. Stay up to date in case the situation changes.
+Not Applicable   | |
+
+## Incident Type
+
+Incident Type Name | Description
+-------------------|-------------
+Bush Fire | Forest and/or Scrub Fire
+Grass Fire | Grass Fire
+Hazard Reduction | Planned controlled burns to reduce bush fire hazards
+Structure Fire | A fire involving a residential, commercial or industrial building
+Haystack Fire | Haystack fire
+HAZMAT | The NSW RFS provides operational support to the Fire & Rescue NSW for hazardous materials incidents
+MVA/Transport | Transport incidents including motor vehicle accident, aircraft incident and incidents involving a railway or railway rolling stock
+Assist Other Agency | Assist other agency such as Fire & Rescue NSW, NSW Police, NSW SES, NSW Ambulance, Defence Force, interstate deployments etc
+Search/Rescue | Search and Rescue, rescue animal
+Flood/Storm/Tree Down | Assisting with Flood or storm damage or tree down
+Vehicle/Equipment Fire | Vehicle or Equipment fire such as car fire, farm machinery fire, transformer fire etc
+Burn off | Burn off such as stubble fire, pile burn etc
+Fire Alarm | Automatic Fire Alarm or Domestic Smoke Alarm
+Medical | Medical incident such as medical evacuation
+Other | Other incidents such as smoke in vicinity, gas leak, building collapse etc
 
 # Warranty
 

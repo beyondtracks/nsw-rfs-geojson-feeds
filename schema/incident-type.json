@@ -1,0 +1,18 @@
+{
+    "Incident Type": "Incident Description",
+    "Bush Fire ": "Forest and/or Scrub Fire",
+    "Grass Fire": "Grass Fire",
+    "Hazard Reduction": "Planned controlled burns to reduce bush fire hazards",
+    "Structure Fire": "A fire involving a residential, commercial or industrial building",
+    "Haystack Fire": "Haystack fire",
+    "HAZMAT": "The NSW RFS provides operational support to the Fire & Rescue NSW for hazardous materials incidents",
+    "MVA/Transport": "Transport incidents including motor vehicle accident, aircraft incident and incidents involving a railway or railway rolling stock",
+    "Assist Other Agency": "Assist other agency such as Fire & Rescue NSW, NSW Police, NSW SES, NSW Ambulance, Defence Force, interstate deployments etc",
+    "Search/Rescue": "Search and Rescue, rescue animal",
+    "Flood/Storm/Tree Down": "Assisting with Flood or storm damage or tree down",
+    "Vehicle/Equipment Fire": "Vehicle or Equipment fire such as car fire, farm machinery fire, transformer fire etc",
+    "Burn off": "Burn off such as stubble fire, pile burn etc",
+    "Fire Alarm": "Automatic Fire Alarm or Domestic Smoke Alarm",
+    "Medical": "Medical incident such as medical evacuation",
+    "Other": "Other incidents such as smoke in vicinity, gas leak, building collapse etc"
+}

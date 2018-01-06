@@ -1,0 +1,1 @@
+_NSW RFS Current Incident Descriptions are © State of New South Wales (NSW Rural Fire Service). For current information go to www.rfs.nsw.gov.au. Licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)._

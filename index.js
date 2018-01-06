@@ -148,21 +148,18 @@ module.exports = {
         if ('alert-level' in properties)
             delete properties['alert-level'];
 
-        properties['alert-level'] = this._toToken(properties.category);
+        properties['alert-level'] = properties.category;
         delete properties.category;
 
         if ('guid_isPermaLink' in properties)
             delete properties['guid_isPermaLink'];
 
-        properties.status = this._toToken(properties.status);
-        properties.type = this._toToken(properties.type);
         properties.fire = properties.fire.match(/Yes/i) ? true : false;
 
         // since this is a generic link applying to every incident don't bother to include it for each
         if (properties.link == 'http://www.rfs.nsw.gov.au/fire-information/fires-near-me') {
             delete properties.link;
         }
-
 
         return properties;
     },
@@ -192,17 +189,6 @@ module.exports = {
      */
     _cleanUpdatedDate: function(datetime) {
         return moment.tz(datetime, 'D MMM YYYY HH:mm', 'Australia/Sydney').format();
-    },
-
-    /**
-     * Given an string converts it into a "token" string which uses a dash instead of spaces and is all lowercase.
-     *
-     * @param {String} str Input string to be converted into a "token"
-     * @returns {String} The string as a "token"
-     * @private
-     */
-    _toToken: function(str) {
-        return str.replace(' ', '-').toLowerCase();
     },
 
     /**
