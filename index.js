@@ -130,16 +130,39 @@ module.exports = {
         if (properties.pubDate) {
             properties.pubDate = this._cleanPubDate(properties.pubDate);
         }
+        properties['pub-date'] = properties.pubDate;
+        delete properties.pubDate;
 
         if (properties.description) {
             Object.assign(properties, this._unpackDescription(properties.description));
             delete properties.description; // remove original description string
         }
 
+        /* use a simplified schema removing some keys and using identifiers rather than full names for some values */
+
+        // ALERT LEVEL seems to be a duplicate of category, best practice is to avoid duplication to reduce the risk of them coming out of sync
+        if ('alert-level' in properties && 'category' in properties && (properties.category !== properties['alert-level'])) {
+            console.error('properties.category !== description.ALERT LEVEL!', properties.category, properties['alert-level']);
+        }
+
+        if ('alert-level' in properties)
+            delete properties['alert-level'];
+
+        properties['alert-level'] = this._toToken(properties.category);
+        delete properties.category;
+
+        if ('guid_isPermaLink' in properties)
+            delete properties['guid_isPermaLink'];
+
+        properties.status = this._toToken(properties.status);
+        properties.type = this._toToken(properties.type);
+        properties.fire = properties.fire.match(/Yes/i) ? true : false;
+
         // since this is a generic link applying to every incident don't bother to include it for each
         if (properties.link == 'http://www.rfs.nsw.gov.au/fire-information/fires-near-me') {
             delete properties.link;
         }
+
 
         return properties;
     },
@@ -172,13 +195,26 @@ module.exports = {
     },
 
     /**
-     * Unpacks the overloaded description string like "KEY1: Value1 <br />KEY2: Value2"
+     * Given an string converts it into a "token" string which uses a dash instead of spaces and is all lowercase.
+     *
+     * @param {String} str Input string to be converted into a "token"
+     * @returns {String} The string as a "token"
+     * @private
+     */
+    _toToken: function(str) {
+        return str.replace(' ', '-').toLowerCase();
+    },
+
+    /**
+     * Unpacks the overloaded description string like "KEY1: Value1 <br />KEY 2: Value2"
      * into an Object like:
      *
      *    {
-     *       "KEY1": "Value1",
-     *       "KEY2": "Value2"
+     *       "key": "Value1",
+     *       "key-2": "Value2"
      *    }
+     *
+     *  Keys are lower cased and have spaces replaced with a dash character `-`.
      *
      * @param {String} description The description field string.
      * @returns {Object} An Object of the unpacked description
@@ -201,6 +237,9 @@ module.exports = {
                 if (key == 'UPDATED') {
                     value = self._cleanUpdatedDate(value);
                 }
+
+                // lower case keys and use - instead of spaces
+                key = key.replace(' ', '-').toLowerCase()
 
                 result[key] = value;
             }

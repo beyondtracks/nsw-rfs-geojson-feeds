@@ -96,12 +96,14 @@ test('cleanUpdatedDate', function(t) {
 test('unpackDescription', function(t) {
     t.deepEqual(_._unpackDescription(), {}, 'undefined arg');
     t.deepEqual(_._unpackDescription(''), {}, 'empty string');
-    t.deepEqual(_._unpackDescription('KEY: Value'), { "KEY": "Value" }, 'single key value');
+    t.deepEqual(_._unpackDescription('key: Value'), { "key": "Value" }, 'single key value');
+    t.deepEqual(_._unpackDescription('KEY: Value'), { "key": "Value" }, 'lowercase key');
+    t.deepEqual(_._unpackDescription('KEY 2: Value'), { "key-2": "Value" }, 'no spaces in key');
     t.deepEqual(_._unpackDescription('KEY: Value<br />KEY2: Value2'),
-        { "KEY": "Value", "KEY2": "Value2" },
+        { "key": "Value", "key2": "Value2" },
         'multiple key values');
     t.deepEqual(_._unpackDescription('KEY: Value  <br>  KEY2: Value 2'),
-        { "KEY": "Value", "KEY2": "Value 2" },
+        { "key": "Value", "key2": "Value 2" },
         'multiple key values with whitespaces');
     t.end();
 });
