@@ -33,6 +33,23 @@ module.exports = {
             var cleanFeature = turf.feature(cleanGeometry, cleanProperties);
             cleanFeatures.push(cleanFeature);
         });
+
+        // sort happens inplace
+        // features are sorted so that important incidents appear on top of lesser ones on the map
+        cleanFeatures.sort((a, b) => {
+            var sortIndexAlertLevelA = self._sortIndexAlertLevel(a.properties['alert-level']);
+            var sortIndexAlertLevelB = self._sortIndexAlertLevel(b.properties['alert-level']);
+
+            var sortIndexStatusA = self._sortIndexStatus(a.properties['status']);
+            var sortIndexStatusB = self._sortIndexStatus(b.properties['status']);
+
+            if (sortIndexStatusA == sortIndexStatusB) {
+                return sortIndexAlertLevelA - sortIndexAlertLevelB;
+            } else {
+                return sortIndexStatusA - sortIndexStatusB;
+            }
+        });
+
         var cleanedGeoJSON = turf.featureCollection(cleanFeatures);
 
         // Limit Coordinate Precision
@@ -42,6 +59,34 @@ module.exports = {
         cleanedGeoJSON = rewind(cleanedGeoJSON);
 
         return cleanedGeoJSON;
+    },
+
+    _sortIndexStatus(value) {
+        switch (value) {
+            case 'Out of control':
+                return 0;
+            case 'Being controlled':
+                return 1;
+            case 'Under control':
+                return 3;
+            default:
+                return 4;
+        }
+    },
+
+    _sortIndexAlertLevel(value) {
+        switch (value) {
+            case 'Emergency Warning':
+                return 0;
+            case 'Watch and Act':
+                return 1;
+            case 'Advice':
+                return 2;
+            case 'Not Applicable':
+                return 3;
+            default:
+                return 4;
+        }
     },
 
     /**

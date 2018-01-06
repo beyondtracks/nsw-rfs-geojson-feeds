@@ -43,6 +43,10 @@ The upstream feed uses dates in the format `3/01/2018 5:20:00 AM` and also `3 Ja
 
 For extra assurances the GeoJSON winding order is enforced with https://github.com/mapbox/geojson-rewind.
 
+## Sorted features
+
+This is really just a workaround for the [inability to sort features within a Mapbox Style](https://github.com/mapbox/mapbox-gl-js/issues/1349) put in just for the BeyondTracks use case, to avoid client side sorting of the GeoJSON. In the future this may be removed. Features are first sorted by status then alert level. Again this is purely driven by the needs of BeyondTracks where status is more important than alert level, the reasoning being that an "Advice" "Out of Control" bushfire is more dangerous to a bushwalker than an "Emergency Warning" "Under Control".
+
 # Usage
 
 Install the Node dependencies with:
@@ -79,9 +83,9 @@ location | String | A description of the location of the incident | `Coast Trk, 
 
 Status Name | Description
 ------------|-------------
-Out of Control | A fire which is spreading on one or more fronts. Effective containment strategies are not in place for the entire perimeter.
-Being Controlled | Effective strategies are in operation or planned for the entire perimeter.
-Under Control | The fire is at a stage where fire fighting resources are only required for patrol purposes and major re-ignition is unlikely.
+Out of control | A fire which is spreading on one or more fronts. Effective containment strategies are not in place for the entire perimeter.
+Being controlled | Effective strategies are in operation or planned for the entire perimeter.
+Under control | The fire is at a stage where fire fighting resources are only required for patrol purposes and major re-ignition is unlikely.
 
 ## Alert Level
 
