@@ -44,9 +44,9 @@ module.exports = {
             var sortIndexStatusB = self._sortIndexStatus(b.properties['status']);
 
             if (sortIndexStatusA == sortIndexStatusB) {
-                return sortIndexAlertLevelA - sortIndexAlertLevelB;
+                return sortIndexAlertLevelB - sortIndexAlertLevelA;
             } else {
-                return sortIndexStatusA - sortIndexStatusB;
+                return sortIndexStatusB - sortIndexStatusA;
             }
         });
 
