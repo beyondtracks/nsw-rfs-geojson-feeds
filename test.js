@@ -128,6 +128,31 @@ test('cleanGeometry', function(t) {
         coordinates: [ [1,1], [2,2] ]
     }, 'geometrycollection to multi geometry');
 
+    t.deepEqual(_._cleanGeometry({
+        type: "GeometryCollection",
+        geometries: [
+            {
+                type: "Point",
+                coordinates: [1,1]
+            },
+            {
+                type: "Polygon",
+                coordinates: [
+                    [
+                        [2, 2], 
+                        [2, 2], 
+                        [2, 2], 
+                        [2, 2]
+                    ]
+                ]
+            }
+        ]
+    }), {
+        type: 'Point',
+        coordinates: [1,1]
+    }, 'geometrycollection with empty polygon');
+
+
     // TODO collection of point, point, polygon
     // TODO collection of point, point, geomCollection (point, point)
     // TODO collection of point, polygon, geomCollection (point, polygon)

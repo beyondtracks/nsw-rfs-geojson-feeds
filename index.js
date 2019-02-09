@@ -1,5 +1,6 @@
 const gp = require('geojson-precision');
 const turf = {
+    area: require('@turf/area').default,
     featureEach: require('@turf/meta').featureEach,
     feature: require('@turf/helpers').feature,
     featureCollection: require('@turf/helpers').featureCollection
@@ -151,7 +152,18 @@ module.exports = {
     _cleanGeometry: function (geometry) {
         var flat = this._flattenGeometries(geometry);
 
-        if (!flat.length) return;
+        flat = flat.map((g) => {
+            if (g && g.type === 'Polygon' && turf.area(g) === 0) {
+                // not a valid polygon
+                return null;
+            }
+            return g;
+        })
+        .filter((g) => {
+            return g !== null;
+        });
+
+        if (!flat.length) return null;
 
         if (flat.length == 1) {
             return flat[0];

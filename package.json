@@ -7,10 +7,11 @@
   "license": "MIT",
   "repository": "github:beyondtracks/nsw-rfs-majorincidents-geojson",
   "scripts": {
-    "test": "tap test.js",
+    "test": "tape test.js",
     "geojsonhint": "./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson; geojsonhint < nsw-rfs-majorincidents.geojson"
   },
   "dependencies": {
+    "@turf/area": "^6.0.1",
     "@turf/helpers": "^5.1.5",
     "@turf/meta": "^5.2.0",
     "geojson-precision": "^0.4.0",
@@ -21,6 +22,6 @@
   },
   "devDependencies": {
     "@mapbox/geojsonhint": "^2.0.1",
-    "tap": "^11.0.1"
+    "tape": "^4.9.2"
   }
 }
