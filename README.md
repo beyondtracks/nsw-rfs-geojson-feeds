@@ -61,6 +61,10 @@ Run the script with:
 
 This will download the upstream feed, process it and save the resulting GeoJSON file at `nsw-rfs-majorincidents.geojson`.
 
+Alternatively if you've pre-downloaded an upstream feed you can run:
+
+    ./bin/nsw-rfs-majorincidents-geojson upstream.json output.geojson
+
 # Schema
 Each GeoJSON Feature represents a major incident. Each Feature may have multiple geometries using a GeometryCollection. For example both a point and a polygon showing a bushfire extent. Although so far every feature contains at a minimum a point geometry, without any documented guarantees about this consumers should accept features with no geometry or only a polygon geometry.
 
