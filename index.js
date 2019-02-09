@@ -53,7 +53,8 @@ module.exports = {
         var cleanedGeoJSON = turf.featureCollection(cleanFeatures);
 
         // Limit Coordinate Precision
-        cleanedGeoJSON = gp.parse(cleanedGeoJSON, 4);
+        // disabled since this can invalidate valid polygons if they are small or have fine detail
+        // cleanedGeoJSON = gp.parse(cleanedGeoJSON, 4);
 
         // Enforce Winding Order
         cleanedGeoJSON = rewind(cleanedGeoJSON);

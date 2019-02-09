@@ -27,6 +27,8 @@ These are converted to flat GeometryCollections when including different Geometr
 
 Although extra coordinate precision can help retain geometry shape even beyond the capture precision, the upstream feed uses 14 decimal places. Practically fire extents or geometry shape won't be more than 10m in accuracy so limiting to 4 decimal places will suffice.
 
+*Temporarily disabled due to issues where small valid polygons became invalid after truncation*
+
 ## Overloaded description
 
 The upstream feed overloads properties into the `description` field in a format like `KEY: Value <br />KEY: Value`. These are exploded out to make them easier to read in applications. The original overloaded description is dropped from the output.
