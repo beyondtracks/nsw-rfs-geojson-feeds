@@ -17,8 +17,12 @@ if (inputFile) {
     // process local downloaded file
     const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(JSON.parse(fs.readFileSync(inputFile === '-' ? '/dev/stdin' : inputFile)));
 
-    // save cleaned GeoJSON to a file
-    fs.writeFileSync(outputFile === '-' ? '/dev/stdout' : outputFile, JSON.stringify(cleanedGeoJSON), 'utf8');
+    // save cleaned GeoJSON to stdout or a file
+    if (outputFile === '-') {
+        process.stdout.write(JSON.stringify(cleanedGeoJSON));
+    } else {
+        fs.writeFileSync(outputFile, JSON.stringify(cleanedGeoJSON), 'utf8');
+    }
 } else {
     // download from upstream
     request(upstreamFeedURL, function (err, res, body) {
@@ -43,7 +47,11 @@ if (inputFile) {
         // clean the GeoJSON feed
         const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(geojson)
 
-        // save cleaned GeoJSON to a file
-        fs.writeFileSync(outputFile, JSON.stringify(cleanedGeoJSON), 'utf8');
+        // save cleaned GeoJSON to stdout or a file
+        if (outputFile === '-') {
+            process.stdout.write(JSON.stringify(cleanedGeoJSON));
+        } else {
+            fs.writeFileSync(outputFile, JSON.stringify(cleanedGeoJSON), 'utf8');
+        }
     });
 }
