@@ -2,27 +2,21 @@
 
 const fs = require('fs');
 const request = require('request');
+const argv = require('minimist')(process.argv.slice(2), { boolean: 'pretty-print' });
 const NSWRFSMajorIncidentsGeoJSON = require('../');
 
-if (process.argv.length < 3) {
+if (argv._.length < 1) {
     throw 'Usage: nsw-rfs-majorincidents-geojson <nsw-rfs-majorincidents.geojson>';
     process.exit(1);
 }
 const upstreamFeedURL = 'https://www.rfs.nsw.gov.au/feeds/majorIncidents.json';
 
-const outputFile = process.argv.length === 4 ? process.argv[3] : process.argv[2];
-const inputFile = process.argv.length === 4 ? process.argv[2] : null;
+const outputFile = argv._.length === 2 ? argv._[1] : argv._[0];
+const inputFile = argv._.length === 2 ? argv._[0] : null;
 
 if (inputFile) {
     // process local downloaded file
-    const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(JSON.parse(fs.readFileSync(inputFile === '-' ? '/dev/stdin' : inputFile)));
-
-    // save cleaned GeoJSON to stdout or a file
-    if (outputFile === '-') {
-        process.stdout.write(JSON.stringify(cleanedGeoJSON));
-    } else {
-        fs.writeFileSync(outputFile, JSON.stringify(cleanedGeoJSON), 'utf8');
-    }
+    processFeed(fs.readFileSync(inputFile === '-' ? '/dev/stdin' : inputFile));
 } else {
     // download from upstream
     request(upstreamFeedURL, function (err, res, body) {
@@ -35,23 +29,29 @@ if (inputFile) {
             process.exit(1);
         }
 
-        // parse the upstream GeoJSON
-        var geojson;
-        try {
-            geojson = JSON.parse(body);
-        } catch (Error) {
-            throw 'Error parsing JSON response body';
-            process.exit(1);
-        }
-
-        // clean the GeoJSON feed
-        const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(geojson)
-
-        // save cleaned GeoJSON to stdout or a file
-        if (outputFile === '-') {
-            process.stdout.write(JSON.stringify(cleanedGeoJSON));
-        } else {
-            fs.writeFileSync(outputFile, JSON.stringify(cleanedGeoJSON), 'utf8');
-        }
+        processFeed(body);
     });
+}
+
+function processFeed(feed) {
+    // parse the upstream GeoJSON
+    var geojson;
+    try {
+        geojson = JSON.parse(feed);
+    } catch (Error) {
+        throw 'Error parsing JSON feed';
+        process.exit(1);
+    }
+
+    // clean the GeoJSON feed
+    const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(geojson)
+
+    const outputString = argv['pretty-print'] ? JSON.stringify(cleanedGeoJSON, null, 2) : JSON.stringify(cleanedGeoJSON);
+
+    // save cleaned GeoJSON to stdout or a file
+    if (outputFile === '-') {
+        process.stdout.write(outputString);
+    } else {
+        fs.writeFileSync(outputFile, outputString, 'utf8');
+    }
 }
