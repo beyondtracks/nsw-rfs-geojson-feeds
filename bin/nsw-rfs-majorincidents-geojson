@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const request = require('request');
-const argv = require('minimist')(process.argv.slice(2), { boolean: 'pretty-print', boolean: 'avoid-geometrycollections', boolean: 'avoid-slivers' });
+const argv = require('minimist')(process.argv.slice(2), { boolean: ['pretty-print', 'avoid-geometrycollections', 'avoid-slivers'] });
 const NSWRFSMajorIncidentsGeoJSON = require('../');
 
 if (argv._.length < 1) {
