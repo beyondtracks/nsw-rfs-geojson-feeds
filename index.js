@@ -6,7 +6,7 @@ const turf = {
     buffer: require('@turf/buffer').default
 };
 const moment = require('moment-timezone');
-const rewind = require('geojson-rewind');
+const rewind = require('@mapbox/geojson-rewind');
 const _ = require('lodash');
 const polygonClipping = require('polygon-clipping');
 

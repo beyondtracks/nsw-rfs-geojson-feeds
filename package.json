@@ -12,12 +12,12 @@
     "geojsonhint": "./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson; geojsonhint < nsw-rfs-majorincidents.geojson"
   },
   "dependencies": {
+    "@mapbox/geojson-rewind": "^0.4.0",
     "@turf/area": "^6.0.1",
     "@turf/buffer": "^5.1.5",
     "@turf/helpers": "^5.1.5",
     "@turf/meta": "^5.2.0",
     "geojson-precision": "^0.4.0",
-    "geojson-rewind": "^0.3.0",
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.14",
@@ -25,7 +25,6 @@
     "request": "^2.83.0"
   },
   "devDependencies": {
-    "@mapbox/geojsonhint": "^2.0.1",
     "eslint": "^6.7.2",
     "eslint-config-mourner": "^3.0.0",
     "tape": "^4.9.2"
