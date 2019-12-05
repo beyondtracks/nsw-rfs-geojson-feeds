@@ -179,11 +179,17 @@ module.exports = {
 
             const flatGeometriesUnioned = nonPolygons;
             if (polygons.length) {
-                const unioned = {
-                    type: 'MultiPolygon',
-                    coordinates: polygonClipping.union(...polygons.map((g) => { return g.coordinates; }))
-                };
-                flatGeometriesUnioned.push(unioned);
+                try {
+                    const unioned = {
+                        type: 'MultiPolygon',
+                        coordinates: polygonClipping.union(...polygons.map(g => g.coordinates))
+                    };
+                    flatGeometriesUnioned.push(unioned);
+                } catch (e) {
+                    // if there was an error unioning polygons, then still output them in their original form
+                    console.error('Union error', e);
+                    flatGeometriesUnioned.push(...polygons);
+                }
             }
 
             if (this._uniformType(flatGeometriesUnioned)) {
