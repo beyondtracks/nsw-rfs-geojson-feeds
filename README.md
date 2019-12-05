@@ -1,4 +1,4 @@
-# nsw-rfs-majorincidents-geojson
+# :fire: nsw-rfs-majorincidents-geojson
 
 The NSW Rural Fire Service (RFS) [publishes a GeoJSON feed of major incidents](http://www.rfs.nsw.gov.au/news-and-media/stay-up-to-date/feeds), this project aims to make that feed more developer friendly.
 
