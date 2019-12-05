@@ -1,4 +1,3 @@
-const gp = require('geojson-precision');
 const turf = {
     area: require('@turf/area').default,
     featureEach: require('@turf/meta').featureEach,
@@ -30,7 +29,7 @@ module.exports = {
      * @param {boolean} [options.avoidGeometryCollections=false] Avoid GeometryCollections and explode into flat Features (this may increase the feature count and duplicate properties across multiple features). Defaults to false.
      * @returns {Object} The "cleaned" GeoJSON Object
      */
-    clean: function (geojson, options) {
+    clean(geojson, options) {
         const self = this;
 
         options = Object.assign({}, defaultOptions, options);
@@ -43,7 +42,7 @@ module.exports = {
 
             if (options.avoidGeometryCollections) {
                 if (cleanGeometry.type === 'GeometryCollection') {
-                    cleanGeometry.geometries.map((geometry) => {
+                    cleanGeometry.geometries.forEach((geometry) => {
                         const cleanFeature = turf.feature(geometry, cleanProperties);
                         cleanFeatures.push(cleanFeature);
                     });
@@ -63,7 +62,7 @@ module.exports = {
             const sortIndexStatusA = self._sortIndexStatus(a.properties['status']);
             const sortIndexStatusB = self._sortIndexStatus(b.properties['status']);
 
-            if (sortIndexStatusA == sortIndexStatusB) {
+            if (sortIndexStatusA === sortIndexStatusB) {
                 return sortIndexAlertLevelB - sortIndexAlertLevelA;
             } else {
                 return sortIndexStatusB - sortIndexStatusA;
@@ -73,38 +72,34 @@ module.exports = {
         // create final GeoJSON with winding order enforced
         const cleanedGeoJSON = rewind(turf.featureCollection(cleanFeatures));
 
-        // Limit Coordinate Precision
-        // disabled since this can invalidate valid polygons if they are small or have fine detail
-        // cleanedGeoJSON = gp.parse(cleanedGeoJSON, 4);
-
         return cleanedGeoJSON;
     },
 
     _sortIndexStatus(value) {
         switch (value) {
-            case 'Out of control':
-                return 0;
-            case 'Being controlled':
-                return 1;
-            case 'Under control':
-                return 3;
-            default:
-                return 4;
+        case 'Out of control':
+            return 0;
+        case 'Being controlled':
+            return 1;
+        case 'Under control':
+            return 3;
+        default:
+            return 4;
         }
     },
 
     _sortIndexAlertLevel(value) {
         switch (value) {
-            case 'Emergency Warning':
-                return 0;
-            case 'Watch and Act':
-                return 1;
-            case 'Advice':
-                return 2;
-            case 'Not Applicable':
-                return 3;
-            default:
-                return 4;
+        case 'Emergency Warning':
+            return 0;
+        case 'Watch and Act':
+            return 1;
+        case 'Advice':
+            return 2;
+        case 'Not Applicable':
+            return 3;
+        default:
+            return 4;
         }
     },
 
@@ -116,7 +111,7 @@ module.exports = {
      * @returns {Array} An Array of GeoJSON Geometry objects
      * @private
      */
-    _flattenGeometries: function (geometry) {
+    _flattenGeometries(geometry) {
         const self = this;
 
         if (geometry === undefined) {
@@ -129,12 +124,10 @@ module.exports = {
 
         if (geometry.type !== 'GeometryCollection') {
             return [geometry];
+        } else if (geometry.geometries && geometry.geometries.length) {
+            return _.flattenDeep(geometry.geometries.map(g => self._flattenGeometries(g)));
         } else {
-            if (geometry.geometries && geometry.geometries.length) {
-                return _.flattenDeep(geometry.geometries.map((g) => { return self._flattenGeometries(g); }));
-            } else {
-                return [];
-            }
+            return [];
         }
     },
 
@@ -146,15 +139,11 @@ module.exports = {
      * @returns {boolean}
      * @private
      */
-    _uniformType: function (geometryList) {
+    _uniformType(geometryList) {
         if (geometryList.length < 2) {
             return true;
         } else {
-            return geometryList.map((geom) => {
-                return geom.type;
-            }).reduce((acc, cur) => {
-                return acc === cur;
-            });
+            return geometryList.map(geom => geom.type).reduce((acc, cur) => acc === cur);
         }
     },
 
@@ -166,10 +155,10 @@ module.exports = {
      * @returns {Object} A GeoJSON Geometry avoiding nested GeometryCollections and using multipart geometry types in favour of single type GeometryCollections
      * @private
      */
-    _cleanGeometry: function (geometry) {
+    _cleanGeometry(geometry) {
         // explode GeometryCollections into an array of Geometries
         // also removing any 0 area polygons
-        const flatGeometries = this._flattenGeometries(geometry) 
+        const flatGeometries = this._flattenGeometries(geometry)
             .map((g) => {
                 if (g && g.type === 'Polygon' && turf.area(g) === 0) {
                     // not a valid polygon
@@ -177,18 +166,16 @@ module.exports = {
                 }
                 return g;
             })
-            .filter((g) => {
-                return g !== null;
-            });
+            .filter(g => g !== null);
 
         if (!flatGeometries.length) return null;
 
-        if (flatGeometries.length == 1) {
+        if (flatGeometries.length === 1) {
             return flatGeometries[0];
         } else {
             // attempt to union multiple Polygons found within the GeometryCollection
-            const polygons = flatGeometries.filter((geometry) => { return geometry.type === 'Polygon'; });
-            const nonPolygons = flatGeometries.filter((geometry) => { return geometry.type !== 'Polygon'; });
+            const polygons = flatGeometries.filter(geometry => geometry.type === 'Polygon');
+            const nonPolygons = flatGeometries.filter(geometry => geometry.type !== 'Polygon');
 
             const flatGeometriesUnioned = nonPolygons;
             if (polygons.length) {
@@ -207,9 +194,9 @@ module.exports = {
                     return flatGeometriesUnioned[0];
                 } else {
                     return {
-                        type: 'Multi' + type,
-                        coordinates: flatGeometriesUnioned.map((g) => { return g.coordinates; })
-                    }
+                        type: `Multi${  type}`,
+                        coordinates: flatGeometriesUnioned.map(g => g.coordinates)
+                    };
                 }
             } else {
                 // can't be converted into a geom type, use GeometryCollection instead
@@ -221,7 +208,7 @@ module.exports = {
         }
     },
 
-    _cleanProperties: function (properties) {
+    _cleanProperties(properties) {
         if (properties.pubDate) {
             properties.pubDate = this._cleanPubDate(properties.pubDate);
             properties['pub-date'] = properties.pubDate;
@@ -252,10 +239,10 @@ module.exports = {
             delete properties['guid_isPermaLink'];
 
         if ('fire' in properties)
-            properties.fire = properties.fire.match(/Yes/i) ? true : false;
+            properties.fire = !!properties.fire.match(/Yes/i);
 
         // since this is a generic link applying to every incident don't bother to include it for each
-        if ('link' in properties && properties.link == 'http://www.rfs.nsw.gov.au/fire-information/fires-near-me') {
+        if ('link' in properties && properties.link === 'http://www.rfs.nsw.gov.au/fire-information/fires-near-me') {
             delete properties.link;
         }
 
@@ -272,7 +259,7 @@ module.exports = {
      * @returns {String} An ISO8601 formatted datetime
      * @private
      */
-    _cleanPubDate: function (datetime) {
+    _cleanPubDate(datetime) {
         return moment.tz(datetime, 'D/MM/YYYY h:mm:ss A', 'Australia/Sydney').format();
     },
 
@@ -285,7 +272,7 @@ module.exports = {
      * @returns {String} An ISO8601 formatted datetime
      * @private
      */
-    _cleanUpdatedDate: function (datetime) {
+    _cleanUpdatedDate(datetime) {
         return moment.tz(datetime, 'D MMM YYYY HH:mm', 'Australia/Sydney').format();
     },
 
@@ -304,7 +291,7 @@ module.exports = {
      * @returns {Object} An Object of the unpacked description
      * @private
      */
-    _unpackDescription: function (description) {
+    _unpackDescription(description) {
         const self = this;
 
         if (!description)
@@ -318,12 +305,12 @@ module.exports = {
                 let key = match[1];
                 let value = match[2];
 
-                if (key == 'UPDATED') {
+                if (key === 'UPDATED') {
                     value = self._cleanUpdatedDate(value);
                 }
 
                 // lower case keys and use - instead of spaces
-                key = key.replace(' ', '-').toLowerCase()
+                key = key.replace(' ', '-').toLowerCase();
 
                 result[key] = value;
             }

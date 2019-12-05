@@ -8,6 +8,7 @@
   "repository": "github:beyondtracks/nsw-rfs-majorincidents-geojson",
   "scripts": {
     "test": "tape test.js",
+    "lint": "eslint index.js test.js",
     "geojsonhint": "./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson; geojsonhint < nsw-rfs-majorincidents.geojson"
   },
   "dependencies": {
@@ -24,6 +25,8 @@
   },
   "devDependencies": {
     "@mapbox/geojsonhint": "^2.0.1",
+    "eslint": "^6.7.2",
+    "eslint-config-mourner": "^3.0.0",
     "tape": "^4.9.2"
   }
 }
