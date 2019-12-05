@@ -58,6 +58,8 @@ Around November 2019 it was observed some bushfire areas were being split into m
 
 ![Shared internal borders](img/shared-borders.png)
 
+Where the internal shared borders aren't perfectly touching you can try with the `--avoid-slivers` option (off by default) which tries to remove slivers less than 25m in width.
+
 # Usage
 
 Install the Node dependencies with:
