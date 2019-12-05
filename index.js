@@ -2,7 +2,8 @@ const turf = {
     area: require('@turf/area').default,
     featureEach: require('@turf/meta').featureEach,
     feature: require('@turf/helpers').feature,
-    featureCollection: require('@turf/helpers').featureCollection
+    featureCollection: require('@turf/helpers').featureCollection,
+    buffer: require('@turf/buffer').default
 };
 const moment = require('moment-timezone');
 const rewind = require('geojson-rewind');
@@ -10,7 +11,8 @@ const _ = require('lodash');
 const polygonClipping = require('polygon-clipping');
 
 const defaultOptions = {
-    avoidGeometryCollections: false
+    avoidGeometryCollections: false,
+    avoidSlivers: false
 };
 
 module.exports = {
@@ -27,6 +29,7 @@ module.exports = {
      * @param {Object} geojson NSW RFS Major Incidents Upstream Feed as a GeoJSON Object
      * @param {Object} [options]
      * @param {boolean} [options.avoidGeometryCollections=false] Avoid GeometryCollections and explode into flat Features (this may increase the feature count and duplicate properties across multiple features). Defaults to false.
+     * @param {boolean} [options.avoidSlivers=false] Try to avoid slivers in the Polygons. Defaults to false.
      * @returns {Object} The "cleaned" GeoJSON Object
      */
     clean(geojson, options) {
@@ -37,7 +40,7 @@ module.exports = {
         // clean up the upstream GeoJSON
         const cleanFeatures = [];
         turf.featureEach(geojson, (feature) => {
-            const cleanGeometry = self._cleanGeometry(feature.geometry);
+            const cleanGeometry = self._cleanGeometry(feature.geometry, {avoidSlivers: options.avoidSlivers});
             const cleanProperties = self._cleanProperties(feature.properties);
 
             if (options.avoidGeometryCollections) {
@@ -152,10 +155,14 @@ module.exports = {
      * GeometryCollections into multipart geometry types.
      *
      * @param {Object} geometry A GeoJSON Geometry
+     * @params {Object} [options]
+     * @params {boolean} [options.avoidSlivers=false] Try to avoid slivers in the Geometry by buffering then reverse buffering.
      * @returns {Object} A GeoJSON Geometry avoiding nested GeometryCollections and using multipart geometry types in favour of single type GeometryCollections
      * @private
      */
-    _cleanGeometry(geometry) {
+    _cleanGeometry(geometry, options) {
+        options = Object.assign({}, {avoidSlivers: false}, options);
+
         // explode GeometryCollections into an array of Geometries
         // also removing any 0 area polygons
         const flatGeometries = this._flattenGeometries(geometry)
@@ -174,7 +181,7 @@ module.exports = {
             return flatGeometries[0];
         } else {
             // attempt to union multiple Polygons found within the GeometryCollection
-            const polygons = flatGeometries.filter(geometry => geometry.type === 'Polygon');
+            const polygons = flatGeometries.filter(geometry => geometry.type === 'Polygon').map(geometry => (options.avoidSlivers ? turf.buffer(geometry, 25, {units: 'meters'}).geometry : geometry));
             const nonPolygons = flatGeometries.filter(geometry => geometry.type !== 'Polygon');
 
             const flatGeometriesUnioned = nonPolygons;
@@ -184,11 +191,20 @@ module.exports = {
                         type: 'MultiPolygon',
                         coordinates: polygonClipping.union(...polygons.map(g => g.coordinates))
                     };
-                    flatGeometriesUnioned.push(unioned);
+
+                    if (options.avoidSlivers) {
+                        flatGeometriesUnioned.push(turf.buffer(unioned, -25, {units: 'meters'}).geometry);
+                    } else {
+                        flatGeometriesUnioned.push(unioned);
+                    }
                 } catch (e) {
                     // if there was an error unioning polygons, then still output them in their original form
                     console.error('Union error', e);
-                    flatGeometriesUnioned.push(...polygons);
+                    if (options.avoidSlivers) {
+                        flatGeometriesUnioned.push(...(turf.buffer(polygons, -25, {units: 'meters'})));
+                    } else {
+                        flatGeometriesUnioned.push(...polygons);
+                    }
                 }
             }
 
