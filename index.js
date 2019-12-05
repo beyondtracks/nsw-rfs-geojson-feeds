@@ -10,6 +10,10 @@ const rewind = require('geojson-rewind');
 const _ = require('lodash');
 const polygonClipping = require('polygon-clipping');
 
+const defaultOptions = {
+    avoidGeometryCollections: false
+};
+
 module.exports = {
     /**
      * "Cleans" the NSW RFS Major Incidents Upstream Feed to:
@@ -22,10 +26,14 @@ module.exports = {
      *   - Union mulitple Polygons within a single GeometryCollection due to artificial shared borders.
      *
      * @param {Object} geojson NSW RFS Major Incidents Upstream Feed as a GeoJSON Object
+     * @param {Object} [options]
+     * @param {boolean} [options.avoidGeometryCollections=false] Avoid GeometryCollections and explode into flat Features (this may increase the feature count and duplicate properties across multiple features). Defaults to false.
      * @returns {Object} The "cleaned" GeoJSON Object
      */
-    clean: function (geojson) {
+    clean: function (geojson, options) {
         const self = this;
+
+        options = Object.assign({}, defaultOptions, options);
 
         // clean up the upstream GeoJSON
         const cleanFeatures = [];
@@ -33,8 +41,17 @@ module.exports = {
             const cleanGeometry = self._cleanGeometry(feature.geometry);
             const cleanProperties = self._cleanProperties(feature.properties);
 
-            const cleanFeature = turf.feature(cleanGeometry, cleanProperties);
-            cleanFeatures.push(cleanFeature);
+            if (options.avoidGeometryCollections) {
+                if (cleanGeometry.type === 'GeometryCollection') {
+                    cleanGeometry.geometries.map((geometry) => {
+                        const cleanFeature = turf.feature(geometry, cleanProperties);
+                        cleanFeatures.push(cleanFeature);
+                    });
+                }
+            } else {
+                const cleanFeature = turf.feature(cleanGeometry, cleanProperties);
+                cleanFeatures.push(cleanFeature);
+            }
         });
 
         // sort happens inplace
@@ -207,9 +224,9 @@ module.exports = {
     _cleanProperties: function (properties) {
         if (properties.pubDate) {
             properties.pubDate = this._cleanPubDate(properties.pubDate);
+            properties['pub-date'] = properties.pubDate;
+            delete properties.pubDate;
         }
-        properties['pub-date'] = properties.pubDate;
-        delete properties.pubDate;
 
         if (properties.description) {
             Object.assign(properties, this._unpackDescription(properties.description));
@@ -226,16 +243,19 @@ module.exports = {
         if ('alert-level' in properties)
             delete properties['alert-level'];
 
-        properties['alert-level'] = properties.category;
-        delete properties.category;
+        if ('category' in properties) {
+            properties['alert-level'] = properties.category;
+            delete properties.category;
+        }
 
         if ('guid_isPermaLink' in properties)
             delete properties['guid_isPermaLink'];
 
-        properties.fire = properties.fire.match(/Yes/i) ? true : false;
+        if ('fire' in properties)
+            properties.fire = properties.fire.match(/Yes/i) ? true : false;
 
         // since this is a generic link applying to every incident don't bother to include it for each
-        if (properties.link == 'http://www.rfs.nsw.gov.au/fire-information/fires-near-me') {
+        if ('link' in properties && properties.link == 'http://www.rfs.nsw.gov.au/fire-information/fires-near-me') {
             delete properties.link;
         }
 

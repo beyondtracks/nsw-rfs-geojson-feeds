@@ -199,3 +199,55 @@ test('cleanGeometry', function(t) {
 
     t.end();
 });
+
+test('clean', function(t) {
+    const geoJSONWithGeometryCollection = {
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                    type: 'GeometryCollection',
+                    geometries: [
+                        {
+                            type: 'Point',
+                            coordinates: [0, 0]
+                        },
+                        {
+                            type: 'LineString',
+                            coordinates: [[0, 0], [1, 1]]
+                        }
+                    ]
+                }
+            }
+        ]
+    };
+
+    const geoJSONWithGeometryCollectionAvoided = {
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                    type: 'Point',
+                    coordinates: [0, 0]
+                }
+            },
+            {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                    type: 'LineString',
+                    coordinates: [[0, 0], [1, 1]]
+                }
+            }
+        ]
+    };
+
+    t.deepEqual(_.clean(geoJSONWithGeometryCollection, {avoidGeometryCollections: false}), geoJSONWithGeometryCollection, 'FeatureCollection with GeometryCollection and avoidGeometryCollections: false');
+    t.deepEqual(_.clean(geoJSONWithGeometryCollection, {avoidGeometryCollections: true}), geoJSONWithGeometryCollectionAvoided, 'FeatureCollection with GeometryCollection and avoidGeometryCollections: true');
+
+    t.end();
+});

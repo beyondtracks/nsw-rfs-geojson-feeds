@@ -23,7 +23,9 @@ The sample crontab file allows you to mirror the RFS feed and serve it with your
 
 The upstream feed uses nested GeometryCollections, although allowed by the [GeoJSON spec](https://tools.ietf.org/html/rfc7946), the recommendation is they SHOULD be avoided.
 
-These are converted to flat GeometryCollections when including different Geometry types or a multipart type where possible.
+Nested GeometryCollections are converted to flat GeometryCollections when they include different `Geometry` types or a multipart geometry where it's possible to avoid using a GeometryCollection at all.
+
+Since some downstream applications can have trouble ingesting GeoJSON data with GeometryCollections of varying types, the option `--avoid-geometrycollections` is provided to explode these out into multiple Features.
 
 ## Coordinate Precision
 

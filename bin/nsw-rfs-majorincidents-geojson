@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const request = require('request');
-const argv = require('minimist')(process.argv.slice(2), { boolean: 'pretty-print' });
+const argv = require('minimist')(process.argv.slice(2), { boolean: 'pretty-print', boolean: 'avoid-geometrycollections' });
 const NSWRFSMajorIncidentsGeoJSON = require('../');
 
 if (argv._.length < 1) {
@@ -44,7 +44,9 @@ function processFeed(feed) {
     }
 
     // clean the GeoJSON feed
-    const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(geojson)
+    const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(geojson, {
+        avoidGeometryCollections: argv['avoid-geometrycollections']
+    });
 
     const outputString = argv['pretty-print'] ? JSON.stringify(cleanedGeoJSON, null, 2) : JSON.stringify(cleanedGeoJSON);
 
