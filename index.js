@@ -8,6 +8,7 @@ const turf = {
 const moment = require('moment-timezone');
 const rewind = require('geojson-rewind');
 const _ = require('lodash');
+const polygonClipping = require('polygon-clipping');
 
 module.exports = {
     /**
@@ -18,31 +19,32 @@ module.exports = {
      *   - Unpack overloaded description field
      *   - Use ISO8601 formatted datetimes
      *   - Enforce GeoJSON winding order
+     *   - Union mulitple Polygons within a single GeometryCollection due to artificial shared borders.
      *
      * @param {Object} geojson NSW RFS Major Incidents Upstream Feed as a GeoJSON Object
      * @returns {Object} The "cleaned" GeoJSON Object
      */
-    clean: function(geojson) {
-        var self = this;
+    clean: function (geojson) {
+        const self = this;
 
         // clean up the upstream GeoJSON
-        var cleanFeatures = [];
-        turf.featureEach(geojson, function (feature) {
-            var cleanGeometry = self._cleanGeometry(feature.geometry);
-            var cleanProperties = self._cleanProperties(feature.properties);
+        const cleanFeatures = [];
+        turf.featureEach(geojson, (feature) => {
+            const cleanGeometry = self._cleanGeometry(feature.geometry);
+            const cleanProperties = self._cleanProperties(feature.properties);
 
-            var cleanFeature = turf.feature(cleanGeometry, cleanProperties);
+            const cleanFeature = turf.feature(cleanGeometry, cleanProperties);
             cleanFeatures.push(cleanFeature);
         });
 
         // sort happens inplace
         // features are sorted so that important incidents appear on top of lesser ones on the map
         cleanFeatures.sort((a, b) => {
-            var sortIndexAlertLevelA = self._sortIndexAlertLevel(a.properties['alert-level']);
-            var sortIndexAlertLevelB = self._sortIndexAlertLevel(b.properties['alert-level']);
+            const sortIndexAlertLevelA = self._sortIndexAlertLevel(a.properties['alert-level']);
+            const sortIndexAlertLevelB = self._sortIndexAlertLevel(b.properties['alert-level']);
 
-            var sortIndexStatusA = self._sortIndexStatus(a.properties['status']);
-            var sortIndexStatusB = self._sortIndexStatus(b.properties['status']);
+            const sortIndexStatusA = self._sortIndexStatus(a.properties['status']);
+            const sortIndexStatusB = self._sortIndexStatus(b.properties['status']);
 
             if (sortIndexStatusA == sortIndexStatusB) {
                 return sortIndexAlertLevelB - sortIndexAlertLevelA;
@@ -51,14 +53,12 @@ module.exports = {
             }
         });
 
-        var cleanedGeoJSON = turf.featureCollection(cleanFeatures);
+        // create final GeoJSON with winding order enforced
+        const cleanedGeoJSON = rewind(turf.featureCollection(cleanFeatures));
 
         // Limit Coordinate Precision
         // disabled since this can invalidate valid polygons if they are small or have fine detail
         // cleanedGeoJSON = gp.parse(cleanedGeoJSON, 4);
-
-        // Enforce Winding Order
-        cleanedGeoJSON = rewind(cleanedGeoJSON);
 
         return cleanedGeoJSON;
     },
@@ -99,8 +99,8 @@ module.exports = {
      * @returns {Array} An Array of GeoJSON Geometry objects
      * @private
      */
-    _flattenGeometries: function(geometry) {
-        var self = this;
+    _flattenGeometries: function (geometry) {
+        const self = this;
 
         if (geometry === undefined) {
             return [];
@@ -150,41 +150,61 @@ module.exports = {
      * @private
      */
     _cleanGeometry: function (geometry) {
-        var flat = this._flattenGeometries(geometry);
+        // explode GeometryCollections into an array of Geometries
+        // also removing any 0 area polygons
+        const flatGeometries = this._flattenGeometries(geometry) 
+            .map((g) => {
+                if (g && g.type === 'Polygon' && turf.area(g) === 0) {
+                    // not a valid polygon
+                    return null;
+                }
+                return g;
+            })
+            .filter((g) => {
+                return g !== null;
+            });
 
-        flat = flat.map((g) => {
-            if (g && g.type === 'Polygon' && turf.area(g) === 0) {
-                // not a valid polygon
-                return null;
-            }
-            return g;
-        })
-        .filter((g) => {
-            return g !== null;
-        });
+        if (!flatGeometries.length) return null;
 
-        if (!flat.length) return null;
-
-        if (flat.length == 1) {
-            return flat[0];
+        if (flatGeometries.length == 1) {
+            return flatGeometries[0];
         } else {
-            if (this._uniformType(flat)) {
+            // attempt to union multiple Polygons found within the GeometryCollection
+            const polygons = flatGeometries.filter((geometry) => { return geometry.type === 'Polygon'; });
+            const nonPolygons = flatGeometries.filter((geometry) => { return geometry.type !== 'Polygon'; });
+
+            const flatGeometriesUnioned = nonPolygons;
+            if (polygons.length) {
+                const unioned = {
+                    type: 'MultiPolygon',
+                    coordinates: polygonClipping.union(...polygons.map((g) => { return g.coordinates; }))
+                };
+                flatGeometriesUnioned.push(unioned);
+            }
+
+            if (this._uniformType(flatGeometriesUnioned)) {
+                const type = flatGeometriesUnioned[0].type;
+
                 // can be converted into a multi geom type
-                return {
-                    type: 'Multi' + flat[0].type,
-                    coordinates: flat.map((g) => { return g.coordinates; })
+                if (type === 'MultiPolygon') {
+                    return flatGeometriesUnioned[0];
+                } else {
+                    return {
+                        type: 'Multi' + type,
+                        coordinates: flatGeometriesUnioned.map((g) => { return g.coordinates; })
+                    }
                 }
             } else {
                 // can't be converted into a geom type, use GeometryCollection instead
                 return {
                     type: 'GeometryCollection',
-                    geometries: flat
+                    geometries: flatGeometriesUnioned
                 };
             }
         }
     },
 
-    _cleanProperties: function(properties) {
+    _cleanProperties: function (properties) {
         if (properties.pubDate) {
             properties.pubDate = this._cleanPubDate(properties.pubDate);
         }
@@ -232,7 +252,7 @@ module.exports = {
      * @returns {String} An ISO8601 formatted datetime
      * @private
      */
-    _cleanPubDate: function(datetime) {
+    _cleanPubDate: function (datetime) {
         return moment.tz(datetime, 'D/MM/YYYY h:mm:ss A', 'Australia/Sydney').format();
     },
 
@@ -245,7 +265,7 @@ module.exports = {
      * @returns {String} An ISO8601 formatted datetime
      * @private
      */
-    _cleanUpdatedDate: function(datetime) {
+    _cleanUpdatedDate: function (datetime) {
         return moment.tz(datetime, 'D MMM YYYY HH:mm', 'Australia/Sydney').format();
     },
 
@@ -264,19 +284,19 @@ module.exports = {
      * @returns {Object} An Object of the unpacked description
      * @private
      */
-    _unpackDescription: function(description) {
-        var self = this;
+    _unpackDescription: function (description) {
+        const self = this;
 
         if (!description)
             return {};
 
-        var lines = description.split(/ *<br ?\/?> */);
-        var result = {};
+        const lines = description.split(/ *<br ?\/?> */);
+        const result = {};
         lines.forEach((line) => {
-            var match = line.match(/^([^:]*): ?(.*)/);
+            const match = line.match(/^([^:]*): ?(.*)/);
             if (match && match.length >= 3) {
-                var key = match[1];
-                var value = match[2];
+                let key = match[1];
+                let value = match[2];
 
                 if (key == 'UPDATED') {
                     value = self._cleanUpdatedDate(value);

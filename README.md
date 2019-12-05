@@ -8,16 +8,16 @@ An archive of historical feed data is at [https://github.com/beyondtracks/nsw-rf
 
 _NSW RFS Current Incidents are © State of New South Wales (NSW Rural Fire Service). For current information go to www.rfs.nsw.gov.au. Licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)._
 
-# Where is it used?
+## Where is it used?
 
 This pipeline has been built for [www.beyondtracks.com](https://www.beyondtracks.com) to provide information about bush fires nearby bushwalks.
 
 # Features
 ## Access-Control-Allow-Origin
 
-The upstream feed lacks the Access-Control-Allow-Origin header which means web applications aren't able to use the feed directly. This was reported to the NSW RFS on the 3rd of December 2015, and as of January 2018 the header still isn't present.
+The upstream feed lacks the Access-Control-Allow-Origin header which means web applications aren't able to use the feed directly. This was reported to the NSW RFS on the 3rd of December 2015, and as of December 2019 the header still isn't present.
 
-The sample crontab file allows you to mirror the RFS feed and serve it with your own HTTP server,  add the Access-Control-Allow-Origin HTTP header.
+The sample crontab file allows you to mirror the RFS feed and serve it with your own HTTP server, adding the Access-Control-Allow-Origin HTTP header.
 
 ## Nested GeometryCollections
 
@@ -31,17 +31,17 @@ Although extra coordinate precision can help retain geometry shape even beyond t
 
 *Temporarily disabled due to issues where small valid polygons became invalid after truncation*
 
-## Overloaded description
+## Overloaded Description
 
-The upstream feed overloads properties into the `description` field in a format like `KEY: Value <br />KEY: Value`. These are exploded out to make them easier to read in applications. The original overloaded description is dropped from the output.
+The upstream feed overloads properties into the `description` field in the format `KEY: Value <br />KEY: Value`. These are exploded out to make them easier to machine read in applications. The original overloaded description is dropped from the output.
 
-## Machine readable schema
+## Machine Readable Schema
 
 Within [schema/](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson/tree/master/schema) are JSON files containing the values and descriptions for Status, Alert Level and Incident Type. These can be used within web applications to provide users more information about what these terms mean.
 
 ## ISO8601 Datetimes
 
-The upstream feed uses dates in the format `3/01/2018 5:20:00 AM` and also `3 Jan 2018 16:20` in local time. These datetimes are converted into ISO8601 datetimes assuming the 'Australia/Sydney' time zone to avoid any ambiguities in interpretation.
+The upstream feed uses dates in the format `3/01/2018 5:20:00 AM` in some places and `3 Jan 2018 16:20` in other places in local time. These datetimes are converted into ISO8601 datetimes assuming the 'Australia/Sydney' time zone to avoid any ambiguities in interpretation.
 
 ## Winding Order
 
@@ -50,6 +50,11 @@ For extra assurances the GeoJSON winding order is enforced with https://github.c
 ## Sorted features
 
 This is really just a workaround for the [inability to sort features within a Mapbox Style](https://github.com/mapbox/mapbox-gl-js/issues/1349) put in just for the BeyondTracks use case, to avoid client side sorting of the GeoJSON. In the future this may be removed. Features are first sorted by status then alert level. Again this is purely driven by the needs of BeyondTracks where status is more important than alert level, the reasoning being that an "Advice" "Out of Control" bushfire is more dangerous to a bushwalker than an "Emergency Warning" "Under Control".
+
+## Removal of Internal Shared Borders
+Around November 2019 it was observed some bushfire areas were being split into multiple `Polygon` geometries within the `GeometryCollection` for the incident. Since these are purely artificial, there is no compelling reason to include them, so we attempt to remove these by unioning multiple Polygons together with [polygon-clipping](https://github.com/mfogel/polygon-clipping).
+
+![Shared internal borders](img/shared-borders.png)
 
 # Usage
 

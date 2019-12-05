@@ -152,6 +152,46 @@ test('cleanGeometry', function(t) {
         coordinates: [1,1]
     }, 'geometrycollection with empty polygon');
 
+    t.deepEqual(_._cleanGeometry({
+        type: "GeometryCollection",
+        geometries: [
+            {
+                type: "Polygon",
+                coordinates: [
+                    [
+                        [0, 0],
+                        [1, 0],
+                        [1, 1],
+                        [0, 1],
+                        [0, 0],
+                    ]
+                ]
+            },
+            {
+                type: "Polygon",
+                coordinates: [
+                    [
+                        [1, 0],
+                        [2, 0],
+                        [2, 1],
+                        [1, 1],
+                        [1, 0],
+                    ]
+                ]
+            }
+        ]
+    }), {
+        type: "MultiPolygon",
+        coordinates: [[
+            [
+                [0, 0],
+                [2, 0],
+                [2, 1],
+                [0, 1],
+                [0, 0],
+            ]
+        ]]
+    }, 'geometrycollection with two touching polygons');
 
     // TODO collection of point, point, polygon
     // TODO collection of point, point, geomCollection (point, point)

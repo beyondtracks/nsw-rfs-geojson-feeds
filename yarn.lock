@@ -603,6 +603,13 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
+polygon-clipping@^0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/polygon-clipping/-/polygon-clipping-0.14.3.tgz#02affe4e2aaee69f686ea9dcd5f9566dd4c941af"
+  integrity sha512-bIaMFYIsHOShMN0JZsvkfk66S7gKMQMlYUpV7LIx+WOBYvJT09eCgoAv2JCDNj6SofA4+o5tlmV76zzUiG4aBQ==
+  dependencies:
+    splaytree "^3.0.1"
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -729,6 +736,11 @@ sharkdown@^0.1.0:
     split "~0.2.10"
     stream-spigot "~2.1.2"
     through "~2.3.4"
+
+splaytree@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/splaytree/-/splaytree-3.0.1.tgz#038d8e6d597a3a1893e8e82693a0f4413b3559f7"
+  integrity sha512-WvQIHRDXLSVn72xjlIG/WGhv/4QO3m+iY2TpVdFRaXd1+/vkNlpkpw1QaNH5taghF9eWXDHWMWnzXyicR8d6ig==
 
 split@~0.2.10:
   version "0.2.10"

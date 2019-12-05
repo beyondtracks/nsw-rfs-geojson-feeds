@@ -19,6 +19,7 @@
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.14",
+    "polygon-clipping": "^0.14.3",
     "request": "^2.83.0"
   },
   "devDependencies": {
