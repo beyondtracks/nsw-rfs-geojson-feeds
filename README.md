@@ -2,7 +2,7 @@
 
 The NSW Rural Fire Service (RFS) [publishes a GeoJSON feed of major incidents](http://www.rfs.nsw.gov.au/news-and-media/stay-up-to-date/feeds), this project aims to make that feed more developer friendly.
 
-You can either build this application into your own pipeline or use the hosted URL at https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson (no service availability guarantees!), [preview it at geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson).
+You can either build this application into your own pipeline or use the hosted URL at https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson (no service availability guarantees), [preview it at geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson).
 
 An archive of historical feed data is at [https://github.com/beyondtracks/nsw-rfs-majorincidents-archive](https://github.com/beyondtracks/nsw-rfs-majorincidents-archive).
 
@@ -10,7 +10,7 @@ _NSW RFS Current Incidents are © State of New South Wales (NSW Rural Fire Servi
 
 ## Where is it used?
 
-This pipeline has been built for [www.beyondtracks.com](https://www.beyondtracks.com) to provide information about bush fires nearby bushwalks.
+This pipeline has been built for [www.beyondtracks.com](https://www.beyondtracks.com) and can be viewed live at [www.beyondtracks.com/map](https://www.beyondtracks.com/map) to provide information about bush fires near bushwalks.
 
 # Features
 ## Access-Control-Allow-Origin
