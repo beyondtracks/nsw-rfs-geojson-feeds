@@ -99,6 +99,8 @@ test('unpackDescription', (t) => {
     t.deepEqual(_._unpackDescription('key: Value'), {'key': 'Value'}, 'single key value');
     t.deepEqual(_._unpackDescription('KEY: Value'), {'key': 'Value'}, 'lowercase key');
     t.deepEqual(_._unpackDescription('KEY 2: Value'), {'key-2': 'Value'}, 'no spaces in key');
+    t.deepEqual(_._unpackDescription('KEY 2 a: Value'), {'key-2-a': 'Value'}, 'no spaces in key with multiple spaces');
+    t.deepEqual(_._unpackDescription('MAJOR FIRE UPDATE AS AT 11:12PM: Value'), {'major-fire-update-as-at-11:12pm': 'Value'}, 'colon in key');
     t.deepEqual(_._unpackDescription('KEY: Value<br />KEY2: Value2'),
         {'key': 'Value', 'key2': 'Value2'},
         'multiple key values');

@@ -322,17 +322,34 @@ module.exports = {
         const lines = description.split(/ *<br ?\/?> */);
         const result = {};
         lines.forEach((line) => {
-            const match = line.match(/^([^:]*): ?(.*)/);
-            if (match && match.length >= 3) {
-                let key = match[1];
-                let value = match[2];
+            const splits = line.split(':');
+            if (splits && splits.length >= 2) {
+                let key;
+                let value;
+                // when they use MAJOR FIRE UPDATE AS AT 15 Dec 2019 11:12PM: http://
+                // they must have really wanted to make life harder for us and made
+                // applications more likely to break without warning
+                if (splits[0].startsWith('MAJOR FIRE UPDATE AS AT')) {
+                    // take the first two as the key and use the rest as value
+                    const keyParts = [];
+                    keyParts.push(splits.shift());
+                    keyParts.push(splits.shift());
+
+                    key = keyParts.join(':');
+                    value = splits.join(':').trim();
+                } else {
+                    // take the first one as the key
+                    key = splits.shift();
+                    // join the rest into the value
+                    value = splits.join(':').trim();
+                }
 
                 if (key === 'UPDATED') {
                     value = self._cleanUpdatedDate(value);
                 }
 
                 // lower case keys and use - instead of spaces
-                key = key.replace(' ', '-').toLowerCase();
+                key = key.replace(/ /g, '-').toLowerCase();
 
                 result[key] = value;
             }
