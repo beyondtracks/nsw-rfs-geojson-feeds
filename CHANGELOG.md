@@ -1,3 +1,7 @@
+# 2.4.1
+
+* Fix an issue in description parsing where the key contained a `:`, "MAJOR FIRE UPDATE AS AT...".
+
 # 2.4.0
 
 * `--avoid-geometrycollections` to explode GeometryCollections out into mulitple Features.
