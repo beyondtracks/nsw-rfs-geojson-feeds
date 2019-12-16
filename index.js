@@ -181,7 +181,8 @@ module.exports = {
             return flatGeometries[0];
         } else {
             // attempt to union multiple Polygons found within the GeometryCollection
-            const polygons = flatGeometries.filter(geometry => geometry.type === 'Polygon').map(geometry => (options.avoidSlivers ? turf.buffer(geometry, 25, {units: 'meters'}).geometry : geometry));
+            const sliverBuffer = 25;
+            const polygons = flatGeometries.filter(geometry => geometry.type === 'Polygon').map(geometry => (options.avoidSlivers ? turf.buffer(geometry, sliverBuffer, {units: 'meters'}).geometry : geometry));
             const nonPolygons = flatGeometries.filter(geometry => geometry.type !== 'Polygon');
 
             const flatGeometriesUnioned = nonPolygons;
@@ -193,7 +194,7 @@ module.exports = {
                     };
 
                     if (options.avoidSlivers) {
-                        flatGeometriesUnioned.push(turf.buffer(unioned, -25, {units: 'meters'}).geometry);
+                        flatGeometriesUnioned.push(turf.buffer(unioned, -sliverBuffer, {units: 'meters'}).geometry);
                     } else {
                         flatGeometriesUnioned.push(unioned);
                     }
@@ -201,7 +202,7 @@ module.exports = {
                     // if there was an error unioning polygons, then still output them in their original form
                     console.error('Union error', e);
                     if (options.avoidSlivers) {
-                        flatGeometriesUnioned.push(...(turf.buffer(polygons, -25, {units: 'meters'})));
+                        flatGeometriesUnioned.push(...(turf.buffer(polygons, -sliverBuffer, {units: 'meters'})));
                     } else {
                         flatGeometriesUnioned.push(...polygons);
                     }
