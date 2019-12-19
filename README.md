@@ -51,7 +51,7 @@ For extra assurances the GeoJSON winding order is enforced with https://github.c
 
 ## Sorted features
 
-This is really just a workaround for the [inability to sort features within a Mapbox Style](https://github.com/mapbox/mapbox-gl-js/issues/1349) put in just for the BeyondTracks use case, to avoid client side sorting of the GeoJSON. In the future this may be removed. Features are first sorted by status then alert level. Again this is purely driven by the needs of BeyondTracks where status is more important than alert level, the reasoning being that an "Advice" "Out of Control" bushfire is more dangerous to a bushwalker than an "Emergency Warning" "Under Control".
+You can control the order of features with `--sort=original|guid|pubdate`. The default is `original` which retains the original sort order, sorting by `guid` uses ascending order and `pubdate` uses chronological order.
 
 ## Removal of Internal Shared Borders
 Around November 2019 it was observed some bushfire areas were being split into multiple `Polygon` geometries within the `GeometryCollection` for the incident. Since these are purely artificial, there is no compelling reason to include them, so we attempt to remove these by unioning multiple Polygons together with [polygon-clipping](https://github.com/mfogel/polygon-clipping).
@@ -59,6 +59,10 @@ Around November 2019 it was observed some bushfire areas were being split into m
 ![Shared internal borders](img/shared-borders.png)
 
 Where the internal shared borders aren't perfectly touching you can try with the `--avoid-slivers` option (off by default) which tries to remove slivers less than 25m in width.
+
+## ID
+
+The `guid` is used as a numeric GeoJSON Feature ID.
 
 # Usage
 

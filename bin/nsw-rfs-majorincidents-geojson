@@ -46,7 +46,8 @@ function processFeed(feed) {
     // clean the GeoJSON feed
     const cleanedGeoJSON = NSWRFSMajorIncidentsGeoJSON.clean(geojson, {
         avoidGeometryCollections: argv['avoid-geometrycollections'],
-        avoidSlivers: argv['avoid-slivers']
+        avoidSlivers: argv['avoid-slivers'],
+        sort: argv['sort'] || 'original'
     });
 
     const outputString = argv['pretty-print'] ? JSON.stringify(cleanedGeoJSON, null, 2) : JSON.stringify(cleanedGeoJSON);

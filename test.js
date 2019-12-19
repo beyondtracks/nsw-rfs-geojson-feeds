@@ -93,6 +93,14 @@ test('cleanUpdatedDate', (t) => {
     t.end();
 });
 
+test('extractID', (t) => {
+    t.equal(_._extractID(''), null, 'empty guid');
+    t.equal(_._extractID(null), null, 'null guid');
+    t.equal(_._extractID('foo/bar'), null, 'id not found');
+    t.equal(_._extractID('https://incidents.rfs.nsw.gov.au/api/v1/incidents/364897'), 364897, 'id found');
+    t.end();
+});
+
 test('unpackDescription', (t) => {
     t.deepEqual(_._unpackDescription(), {}, 'undefined arg');
     t.deepEqual(_._unpackDescription(''), {}, 'empty string');
@@ -248,8 +256,42 @@ test('clean', (t) => {
         ]
     };
 
+    const geoJSONToSort = {
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                properties: {
+                    guid: 'https://incidents.rfs.nsw.gov.au/api/v1/incidents/3',
+                    pubDate: '19/12/2019 2:00:00 AM'
+                },
+                geometry: null
+            },
+            {
+                type: 'Feature',
+                properties: {
+                    guid: 'https://incidents.rfs.nsw.gov.au/api/v1/incidents/2',
+                    pubDate: '19/12/2019 3:00:00 AM'
+                },
+                geometry: null
+            },
+            {
+                type: 'Feature',
+                properties: {
+                    guid: 'https://incidents.rfs.nsw.gov.au/api/v1/incidents/1',
+                    pubDate: '19/12/2019 1:00:00 AM'
+                },
+                geometry: null
+            },
+        ]
+    };
+
     t.deepEqual(_.clean(geoJSONWithGeometryCollection, {avoidGeometryCollections: false}), geoJSONWithGeometryCollection, 'FeatureCollection with GeometryCollection and avoidGeometryCollections: false');
     t.deepEqual(_.clean(geoJSONWithGeometryCollection, {avoidGeometryCollections: true}), geoJSONWithGeometryCollectionAvoided, 'FeatureCollection with GeometryCollection and avoidGeometryCollections: true');
+
+    t.deepEqual(_.clean(geoJSONToSort, {sort: 'original'}).features.map(feature => feature.id), [3, 2, 1], 'original sort');
+    t.deepEqual(_.clean(geoJSONToSort, {sort: 'guid'}).features.map(feature => feature.id), [1, 2, 3], 'guid sort');
+    t.deepEqual(_.clean(geoJSONToSort, {sort: 'pubdate'}).features.map(feature => feature.id), [1, 3, 2], 'pubdate sort');
 
     t.end();
 });

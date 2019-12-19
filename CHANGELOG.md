@@ -1,3 +1,8 @@
+# master
+
+* `--sort=original|guid|pubdate` option to sort features.
+* `guid` is promoted to a GeoJSON Feature `id`.
+
 # 2.4.1
 
 * Fix an issue in description parsing where the key contained a `:`, "MAJOR FIRE UPDATE AS AT...".

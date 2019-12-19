@@ -30,6 +30,7 @@ module.exports = {
      * @param {Object} [options]
      * @param {boolean} [options.avoidGeometryCollections=false] Avoid GeometryCollections and explode into flat Features (this may increase the feature count and duplicate properties across multiple features). Defaults to false.
      * @param {boolean} [options.avoidSlivers=false] Try to avoid slivers in the Polygons. Defaults to false.
+     * @param {original|guid|pubdate} [options.sort=original] Sort features by. Defaults to `original`.
      * @returns {Object} The "cleaned" GeoJSON Object
      */
     clean(geojson, options) {
@@ -38,7 +39,7 @@ module.exports = {
         options = Object.assign({}, defaultOptions, options);
 
         // clean up the upstream GeoJSON
-        const cleanFeatures = [];
+        let cleanFeatures = [];
         turf.featureEach(geojson, (feature) => {
             const cleanGeometry = self._cleanGeometry(feature.geometry, {avoidSlivers: options.avoidSlivers});
             const cleanProperties = self._cleanProperties(feature.properties);
@@ -56,21 +57,23 @@ module.exports = {
             }
         });
 
-        // sort happens inplace
-        // features are sorted so that important incidents appear on top of lesser ones on the map
-        cleanFeatures.sort((a, b) => {
-            const sortIndexAlertLevelA = self._sortIndexAlertLevel(a.properties['alert-level']);
-            const sortIndexAlertLevelB = self._sortIndexAlertLevel(b.properties['alert-level']);
-
-            const sortIndexStatusA = self._sortIndexStatus(a.properties['status']);
-            const sortIndexStatusB = self._sortIndexStatus(b.properties['status']);
-
-            if (sortIndexStatusA === sortIndexStatusB) {
-                return sortIndexAlertLevelB - sortIndexAlertLevelA;
-            } else {
-                return sortIndexStatusB - sortIndexStatusA;
+        // promote GUID to id
+        cleanFeatures = cleanFeatures.map((feature) => {
+            const featureID = self._extractID(feature.properties.guid);
+            if (featureID !== null) {
+                feature.id = featureID;
             }
+            return feature;
         });
+
+        // sort features
+        const sortBy = {
+            guid: 'id',
+            pubdate: i => (new Date(i.properties['pub-date'])).getTime()
+        };
+        if (options.sort && options.sort in sortBy) {
+            cleanFeatures = _.sortBy(cleanFeatures, [sortBy[options.sort]]);
+        }
 
         // create final GeoJSON with winding order enforced
         const cleanedGeoJSON = rewind(turf.featureCollection(cleanFeatures));
@@ -104,6 +107,27 @@ module.exports = {
         default:
             return 4;
         }
+    },
+
+    /**
+     * Given a GUID string in the form `https://incidents.rfs.nsw.gov.au/api/v1/incidents/361069`
+     * return the ID as a number.
+     *
+     * @param {string} guid
+     * @returns {Number}
+     */
+    _extractID(guid) {
+        if (guid) {
+            const matches = guid.match(/([0-9]*)$/);
+            if (matches && matches.length === 2) {
+                const integer = Number.parseInt(matches[1]);
+                if (Number.isFinite(integer)) {
+                    return integer;
+                }
+            }
+        }
+
+        return null;
     },
 
     /**
