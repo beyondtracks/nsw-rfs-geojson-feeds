@@ -1,4 +1,4 @@
-# master
+# 2.5.0
 
 * `--sort=original|guid|pubdate` option to sort features.
 * `guid` is promoted to a GeoJSON Feature `id`.
