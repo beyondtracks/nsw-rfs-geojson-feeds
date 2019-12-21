@@ -88,13 +88,15 @@ Alternatively if you've pre-downloaded an upstream feed you can run:
 * `--sort=<original|guid|pubdate>` the default is `original` which retains the original sort order, sorting by `guid` uses ascending order and `pubdate` uses chronological order
 
 # Schema
-Each GeoJSON Feature represents a major incident. Each Feature may have multiple geometries using a GeometryCollection. For example both a point and a polygon showing a bushfire extent. Although so far every feature contains at a minimum a point geometry, without any documented guarantees about this consumers should accept features with no geometry or only a polygon geometry.
+Each GeoJSON Feature represents a major incident. Each Feature may have multiple geometries using a GeometryCollection. For example both a point indicating a rough location and a polygon showing a bushfire extent. Although so far every feature contains at a minimum a point geometry, without any documented guarantees about this consumers should accept features with no geometry or only a polygon geometry.
 
-Each feature has a properties field as follows. Note that these vary from the upstream feed, the full list of possible values is unknown these are just the ones I've come across.
+Each feature has a properties field as follows. Note that these vary from the upstream feed, the full list of possible values is unknown these are just the ones I've come across. None of these properties are guaranteed to be present.
 
 Key   | Type | Description | Example
 ------|------|-------------|---------
 title | String | A short name used as the tile of this incident, given to assist with managing multiple incidents. Usually this is the name of a nearby road or geographic feature but it doesn't necessarily reflect the exact location of that incident. | `Grain Valley Rd, Boggabri`
+link | String | A URL where more information about the incident can be found. If not found the generic link `http://www.rfs.nsw.gov.au/fire-information/fires-near-me` should be used.
+link-updated | String | Datetime in ISO8601 for the when the link contents were last updated.
 alert-level | String | Alert level of the incident, see [#alert-level](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#alert-level) | `emergency-warning`, `watch-and-act`, `advice`, 'not-applicable`
 status | String | Status of the incident, see [#status](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#status) | `out-of-control`, `being-controlled`, 'under-control'
 guid | String | A globally unique identifier for this incident. Usually it is a non-publicly accessible URL | `https://incidents.rfs.nsw.gov.au/api/v1/incidents/285935`
