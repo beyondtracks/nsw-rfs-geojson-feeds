@@ -375,11 +375,12 @@ module.exports = {
      * times of Australia/Sydney.
      *
      * @param {String} datetime A date string like "3 Jan 2018 16:20" as used in the UPDATED field
+     * @param {boolean} twelveHour `true` if the date is in 12 hour format, otherwise assumes 24 hour format.
      * @returns {String} An ISO8601 formatted datetime
      * @private
      */
-    _cleanUpdatedDate(datetime) {
-        return moment.tz(datetime, 'D MMM YYYY HH:mm', 'Australia/Sydney').format();
+    _cleanUpdatedDate(datetime, twelveHour) {
+        return moment.tz(datetime, twelveHour ? 'D MMM YYYY HH:mmA' : 'D MMM YYYY HH:mm', 'Australia/Sydney').format();
     },
 
     /**
@@ -405,7 +406,7 @@ module.exports = {
 
         const lines = description.split(/ *<br ?\/?> */);
         const result = {};
-        lines.forEach((line) => {
+        for (const line of lines) {
             const splits = line.split(':');
             if (splits && splits.length >= 2) {
                 let key;
@@ -421,6 +422,23 @@ module.exports = {
 
                     key = keyParts.join(':');
                     value = splits.join(':').trim();
+
+                    // now translate
+                    //   key: MAJOR FIRE UPDATE AS AT 21 Dec 2019 11:12PM
+                    //   value: <a href='http://www.rfs.nsw.gov.au/fire-information/major-fire-updates/mfu?id=6025' target='_blank'> More information</a>
+                    // into
+                    //   link: http://www.rfs.nsw.gov.au/fire-information/major-fire-updates/mfu?id=6025
+                    //   link-updated: 2019-12-21T23:12:00+11:00
+                    const asAt = key.replace(/^MAJOR FIRE UPDATE AS AT /, '');
+                    const date = this._cleanUpdatedDate(asAt, true);
+                    const matches = value.match('(http[^\']*)');
+                    if (matches && matches.length === 2) {
+                        const link = matches[1];
+
+                        result['major-fire-update-link'] = link;
+                        result['major-fire-update-updated'] = date;
+                        continue;
+                    }
                 } else {
                     // take the first one as the key
                     key = splits.shift();
@@ -437,7 +455,16 @@ module.exports = {
 
                 result[key] = value;
             }
-        });
+        }
+
+        if ('major-fire-update-link' in result) {
+            result.link = result['major-fire-update-link'];
+            delete result['major-fire-update-link'];
+        }
+        if ('major-fire-update-updated' in result) {
+            result['link-updated'] = result['major-fire-update-updated'];
+            delete result['major-fire-update-updated'];
+        }
 
         return result;
     }
