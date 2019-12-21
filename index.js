@@ -177,7 +177,9 @@ module.exports = {
 
     /**
      * Avoids nested GeometryCollections where possible and converts single type
-     * GeometryCollections into multipart geometry types.
+     * GeometryCollections into multipart geometry types. Where the GeometryCollection
+     * contains mixed geometries, they are also reduced into a GeometryCollection of
+     * multipart geometries.
      *
      * @param {Object} geometry A GeoJSON Geometry
      * @params {Object} [options]
@@ -203,9 +205,12 @@ module.exports = {
         if (!flatGeometries.length) return null;
 
         if (flatGeometries.length === 1) {
+            // a single geomtery can be returned as is
             return flatGeometries[0];
         } else {
-            // attempt to union multiple Polygons found within the GeometryCollection
+            // Attempt to union multiple Polygons found within the GeometryCollection,
+            // since as of Dec 2019 large polygons are being split on artificial internal
+            // boundaries which we try to remove.
             const sliverBuffer = 25;
             const polygons = flatGeometries.filter(geometry => geometry.type === 'Polygon').map(geometry => (options.avoidSlivers ? turf.buffer(geometry, sliverBuffer, {units: 'meters'}).geometry : geometry));
             const nonPolygons = flatGeometries.filter(geometry => geometry.type !== 'Polygon');
@@ -213,10 +218,23 @@ module.exports = {
             const flatGeometriesUnioned = nonPolygons;
             if (polygons.length) {
                 try {
-                    const unioned = {
-                        type: 'MultiPolygon',
-                        coordinates: polygonClipping.union(...polygons.map(g => g.coordinates))
-                    };
+                    let unioned;
+                    if (polygons.length > 1) {
+                        const polygonsUnioned = polygonClipping.union(...polygons.map(g => g.coordinates))
+                        if (polygonsUnioned.length > 1) {
+                            unioned = {
+                                type: 'MultiPolygon',
+                                coordinates: polygonsUnioned
+                            };
+                        } else {
+                            unioned = {
+                                type: 'Polygon',
+                                coordinates: polygonsUnioned[0]
+                            };
+                        }
+                    } else {
+                        unioned = polygons[0];
+                    }
 
                     if (options.avoidSlivers) {
                         flatGeometriesUnioned.push(turf.buffer(unioned, -sliverBuffer, {units: 'meters'}).geometry);
@@ -248,9 +266,49 @@ module.exports = {
                 }
             } else {
                 // can't be converted into a geom type, use GeometryCollection instead
+                // however still check if any of the geometries can be combined into multi types
+                const points = flatGeometriesUnioned.filter(g => g.type === 'Point');
+                const lines = flatGeometriesUnioned.filter(g => g.type === 'LineString');
+                const polygons = flatGeometriesUnioned.filter(g => g.type === 'Polygon');
+                const others = flatGeometriesUnioned.filter(g => !(['Point', 'LineString','Polygon'].includes(g.type)));
+
+                const geometries = [];
+                if (points.length > 1) {
+                    geometries.push({
+                        type: 'MultiPoint',
+                        coordinates: points.map(g => g.coordinates)
+                    });
+                } else if (points.length === 1) {
+                    geometries.push(points[0])
+                }
+
+                if (lines.length > 1) {
+                    geometries.push({
+                        type: 'MultiLineString',
+                        coordinates: lines.map(g => g.coordinates)
+                    });
+                } else if (lines.length === 1) {
+                    geometries.push(lines[0])
+                }
+
+                if (polygons.length > 1) {
+                    geometries.push({
+                        type: 'MultiPolygon',
+                        coordinates: polygons.map(g => g.coordinates)
+                    });
+                } else if (polygons.length === 1) {
+                    geometries.push(polygons[0])
+                }
+
+                if (others.length > 1) {
+                    geometries.push(...others);
+                } else if (others.length === 1) {
+                    geometries.push(others[0])
+                }
+
                 return {
                     type: 'GeometryCollection',
-                    geometries: flatGeometriesUnioned
+                    geometries: geometries
                 };
             }
         }

@@ -203,9 +203,150 @@ test('cleanGeometry', (t) => {
         ]]
     }, 'geometrycollection with two touching polygons');
 
-    // TODO collection of point, point, polygon
-    // TODO collection of point, point, geomCollection (point, point)
-    // TODO collection of point, polygon, geomCollection (point, polygon)
+    debugger;
+    t.deepEqual(_._cleanGeometry({
+        type: 'GeometryCollection',
+        geometries: [
+            {
+                type: 'Point',
+                coordinates: [0, 0]
+            },
+            {
+                type: 'Point',
+                coordinates: [1, 1]
+            },
+            {
+                type: 'Polygon',
+                coordinates: [
+                    [
+                        [0, 0],
+                        [1, 0],
+                        [1, 1],
+                        [0, 1],
+                        [0, 0],
+                    ]
+                ]
+            }
+        ]
+    }), {
+        type: 'GeometryCollection',
+        geometries: [
+            {
+                type: 'MultiPoint',
+                coordinates: [[0, 0], [1, 1]]
+            },
+            {
+                type: 'Polygon',
+                coordinates: [
+                    [
+                        [0, 0],
+                        [1, 0],
+                        [1, 1],
+                        [0, 1],
+                        [0, 0],
+                    ]
+                ]
+            }
+        ]
+    }, 'geometrycollection of point, point, polygon');
+
+    t.deepEqual(_._cleanGeometry({
+        type: 'GeometryCollection',
+        geometries: [
+            {
+                type: 'Point',
+                coordinates: [0, 0]
+            },
+            {
+                type: 'Point',
+                coordinates: [1, 1]
+            },
+            {
+                type: 'GeometryCollection',
+                geometries: [
+                    {
+                        type: 'Point',
+                        coordinates: [2, 2]
+                    },
+                    {
+                        type: 'Point',
+                        coordinates: [3, 3]
+                    }
+                ]
+            }
+        ]
+    }), {
+        type: 'GeometryCollection',
+        geometries: [
+            {
+                type: 'MultiPoint',
+                coordinates: [[0, 0], [1, 1], [2, 2], [3, 3]]
+            }
+        ]
+    }, 'geometrycollection of point, point, geomCollection (point, point)');
+
+    t.deepEqual(_._cleanGeometry({
+        type: 'GeometryCollection',
+        geometries: [
+            {
+                type: 'Point',
+                coordinates: [0, 0]
+            },
+            {
+                type: 'Polygon',
+                coordinates: [
+                    [
+                        [0, 0],
+                        [1, 0],
+                        [1, 1],
+                        [0, 1],
+                        [0, 0],
+                    ]
+                ]
+            },
+            {
+                type: 'GeometryCollection',
+                geometries: [
+                    {
+                        type: 'Point',
+                        coordinates: [1, 1]
+                    },
+                    {
+                        type: 'Polygon',
+                        coordinates: [
+                            [
+                                [1, 0],
+                                [2, 0],
+                                [2, 1],
+                                [1, 1],
+                                [1, 0],
+                            ]
+                        ]
+                    }
+                ]
+            }
+        ]
+    }), {
+        type: 'GeometryCollection',
+        geometries: [
+            {
+                type: 'MultiPoint',
+                coordinates: [[0, 0], [1, 1]]
+            },
+            {
+                type: 'Polygon',
+                coordinates: [
+                    [
+                        [0, 0],
+                        [2, 0],
+                        [2, 1],
+                        [0, 1],
+                        [0, 0],
+                    ]
+                ]
+            }
+        ]
+    }, 'geometrycollection of point, polygon, geomCollection (point, polygon)');
 
     t.end();
 });
