@@ -1,3 +1,7 @@
+#master
+
+* Attempt to parse out the major fire update link and insert it as the link as this is more useful. This also adds a new property 'link-updated` which contains the time contained in the "MAJOR FIRE UPDATE AS AT...".
+
 # 2.5.0
 
 * `--sort=original|guid|pubdate` option to sort features.
