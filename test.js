@@ -115,7 +115,7 @@ test('unpackDescription', (t) => {
     t.deepEqual(_._unpackDescription('KEY: Value  <br>  KEY2: Value 2'),
         {'key': 'Value', 'key2': 'Value 2'},
         'multiple key values with whitespaces');
-    t.deepEqual(_._unpackDescription("MAJOR FIRE UPDATE AS AT 21 Dec 2019 11:12PM: <a href='http://www.rfs.nsw.gov.au/fire-information/major-fire-updates/mfu?id=6025' target='_blank'> More information</a>"),
+    t.deepEqual(_._unpackDescription('MAJOR FIRE UPDATE AS AT 21 Dec 2019 11:12PM: <a href=\'http://www.rfs.nsw.gov.au/fire-information/major-fire-updates/mfu?id=6025\' target=\'_blank\'> More information</a>'),
         {
             'link': 'http://www.rfs.nsw.gov.au/fire-information/major-fire-updates/mfu?id=6025',
             'link-updated': '2019-12-21T23:12:00+11:00'
@@ -208,7 +208,6 @@ test('cleanGeometry', (t) => {
         ]]
     }, 'geometrycollection with two touching polygons');
 
-    debugger;
     t.deepEqual(_._cleanGeometry({
         type: 'GeometryCollection',
         geometries: [

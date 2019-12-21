@@ -220,7 +220,7 @@ module.exports = {
                 try {
                     let unioned;
                     if (polygons.length > 1) {
-                        const polygonsUnioned = polygonClipping.union(...polygons.map(g => g.coordinates))
+                        const polygonsUnioned = polygonClipping.union(...polygons.map(g => g.coordinates));
                         if (polygonsUnioned.length > 1) {
                             unioned = {
                                 type: 'MultiPolygon',
@@ -270,7 +270,7 @@ module.exports = {
                 const points = flatGeometriesUnioned.filter(g => g.type === 'Point');
                 const lines = flatGeometriesUnioned.filter(g => g.type === 'LineString');
                 const polygons = flatGeometriesUnioned.filter(g => g.type === 'Polygon');
-                const others = flatGeometriesUnioned.filter(g => !(['Point', 'LineString','Polygon'].includes(g.type)));
+                const others = flatGeometriesUnioned.filter(g => !(['Point', 'LineString', 'Polygon'].includes(g.type)));
 
                 const geometries = [];
                 if (points.length > 1) {
@@ -279,7 +279,7 @@ module.exports = {
                         coordinates: points.map(g => g.coordinates)
                     });
                 } else if (points.length === 1) {
-                    geometries.push(points[0])
+                    geometries.push(points[0]);
                 }
 
                 if (lines.length > 1) {
@@ -288,7 +288,7 @@ module.exports = {
                         coordinates: lines.map(g => g.coordinates)
                     });
                 } else if (lines.length === 1) {
-                    geometries.push(lines[0])
+                    geometries.push(lines[0]);
                 }
 
                 if (polygons.length > 1) {
@@ -297,18 +297,18 @@ module.exports = {
                         coordinates: polygons.map(g => g.coordinates)
                     });
                 } else if (polygons.length === 1) {
-                    geometries.push(polygons[0])
+                    geometries.push(polygons[0]);
                 }
 
                 if (others.length > 1) {
                     geometries.push(...others);
                 } else if (others.length === 1) {
-                    geometries.push(others[0])
+                    geometries.push(others[0]);
                 }
 
                 return {
                     type: 'GeometryCollection',
-                    geometries: geometries
+                    geometries
                 };
             }
         }
