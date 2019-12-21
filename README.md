@@ -95,14 +95,14 @@ Each feature has a properties field as follows. Note that these vary from the up
 Key   | Type | Description | Example
 ------|------|-------------|---------
 title | String | A short name used as the tile of this incident, given to assist with managing multiple incidents. Usually this is the name of a nearby road or geographic feature but it doesn't necessarily reflect the exact location of that incident. | `Grain Valley Rd, Boggabri`
-link | String | A URL where more information about the incident can be found. If not found the generic link `http://www.rfs.nsw.gov.au/fire-information/fires-near-me` should be used.
-link-updated | String | Datetime in ISO8601 for the when the link contents were last updated.
-alert-level | String | Alert level of the incident, see [#alert-level](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#alert-level) | `emergency-warning`, `watch-and-act`, `advice`, 'not-applicable`
-status | String | Status of the incident, see [#status](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#status) | `out-of-control`, `being-controlled`, 'under-control'
+link | String | A URL where more information about the incident can be found. If not found the generic link `http://www.rfs.nsw.gov.au/fire-information/fires-near-me` should be used. | `http://www.rfs.nsw.gov.au/fire-information/major-fire-updates/mfu?id=6025`
+link-updated | String | Datetime in ISO8601 for the when the link contents were last updated. | `2019-12-21T21:14:00+11:00`
+alert-level | String | Alert level of the incident, see [#alert-level](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#alert-level) | `emergency-warning`, `watch-and-act`, `advice`, `not-applicable`
+status | String | Status of the incident, see [#status](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#status) | `out-of-control`, `being-controlled`, `under-control`
 guid | String | A globally unique identifier for this incident. Usually it is a non-publicly accessible URL | `https://incidents.rfs.nsw.gov.au/api/v1/incidents/285935`
 pub-date | String | Datetime in ISO8601 of when the incident was first published | `2018-01-05T23:41:00+11:00`
 updated | String | Datetime in ISO8601 of when the incident details were last updated | `2018-01-06T10:41:00+11:00`
-responsible-agency | String | The name of the agency responsible for responding to the incident | `Rural Fire Service`, `NSW National Parks and Wildlife Service`.
+responsible-agency | String | The name of the agency responsible for responding to the incident | `Rural Fire Service`, `NSW National Parks and Wildlife Service`
 size | String | The ground area which the incident affects | `2790 ha`
 type | String | The type of incident, see [#incident-type](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#incident-type) | `bush-fire`, `medical`, `grass-fire`
 fire | boolean | Indicates if this this incident a fire (`true`) or not (`false`) | `true`, `false`
