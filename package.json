@@ -9,7 +9,7 @@
   "scripts": {
     "test": "tape test.js",
     "lint": "eslint index.js test.js",
-    "geojsonhint": "./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson; geojsonhint < nsw-rfs-majorincidents.geojson"
+    "test-e2e": "./e2eTest.sh
   },
   "dependencies": {
     "@mapbox/geojson-rewind": "^0.4.0",

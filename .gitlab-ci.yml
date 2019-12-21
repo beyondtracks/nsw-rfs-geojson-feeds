@@ -10,8 +10,10 @@ test:
         - yarn run lint
         - yarn run test
         - yarn global add geojsonhint
-        - yarn run geojsonhint
+        - yarn run test-e2e
     artifacts:
         name: "nsw-rfs-majorincidents"
         paths:
             - nsw-rfs-majorincidents.geojson
+            - nsw-rfs-majorincidents-avoidgeometrycollections.geojson
+            - nsw-rfs-majorincidents-avoidslivers.geojson
