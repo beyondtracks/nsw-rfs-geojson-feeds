@@ -1,4 +1,4 @@
-# master
+# 2.6.0
 
 * Attempt to parse out the major fire update link and insert it as the link as this is more useful. This also adds a new property 'link-updated` which contains the time contained in the "MAJOR FIRE UPDATE AS AT...".
 
