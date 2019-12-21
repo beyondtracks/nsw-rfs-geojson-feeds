@@ -85,6 +85,7 @@ Alternatively if you've pre-downloaded an upstream feed you can run:
 * `--pretty-print` pretty print the output, otherwise output is minified
 * `--avoid-geometrycollections` explode GeometryCollections out to multiple Features to avoid the use of GeometryCollections (handy for use in QGIS which doesn't support varying geometry types within a GeometryCollection, see https://github.com/qgis/QGIS/issues/32747) (off by default)
 * `--avoid-slivers` to try and remove narrow slivers in polygons (off by default)
+* `--sort=<original|guid|pubdate>` the default is `original` which retains the original sort order, sorting by `guid` uses ascending order and `pubdate` uses chronological order
 
 # Schema
 Each GeoJSON Feature represents a major incident. Each Feature may have multiple geometries using a GeometryCollection. For example both a point and a polygon showing a bushfire extent. Although so far every feature contains at a minimum a point geometry, without any documented guarantees about this consumers should accept features with no geometry or only a polygon geometry.
