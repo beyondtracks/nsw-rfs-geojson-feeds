@@ -115,6 +115,7 @@ module.exports = {
      *
      * @param {string} guid
      * @returns {Number}
+     * @private
      */
     _extractID(guid) {
         if (guid) {
