@@ -469,7 +469,7 @@ test('clean', (t) => {
                 properties: {},
                 geometry: {
                     type: 'Polygon',
-                    coordinates: coordinates
+                    coordinates
                 }
             }
         ]
