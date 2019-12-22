@@ -296,9 +296,10 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.4.0:
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.12.2.tgz#0f5946c427ed9ec0d91a46bb9def53e54650e555"
+commander@2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
+  integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -666,11 +667,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-geojson-precision@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/geojson-precision/-/geojson-precision-0.4.0.tgz#d8efa4df16a4a68e43f2d1ebf4dadffff10c89dc"
+geojson-precision@andrewharvey/geojson-precision#selective-precision:
+  version "1.0.0"
+  resolved "https://codeload.github.com/andrewharvey/geojson-precision/tar.gz/d5e7bd84443a12bca3bb23208c073aee683c4b98"
   dependencies:
-    commander "^2.4.0"
+    commander "2.19.0"
 
 getpass@^0.1.1:
   version "0.1.7"

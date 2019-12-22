@@ -438,5 +438,42 @@ test('clean', (t) => {
     t.deepEqual(_.clean(geoJSONToSort, {sort: 'guid'}).features.map(feature => feature.id), [1, 2, 3], 'guid sort');
     t.deepEqual(_.clean(geoJSONToSort, {sort: 'pubdate'}).features.map(feature => feature.id), [1, 3, 2], 'pubdate sort');
 
+    t.deepEqual(_.clean({
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                    type: 'Point',
+                    coordinates: [150.123456789, -34.123456789]
+                }
+            }
+        ]
+    }).features[0].geometry.coordinates, [150.1235, -34.1235], 'limit point precision');
+
+    const coordinates = [
+        [
+            [150.123456789, -34.123456789],
+            [151.123456789, -34.123456789],
+            [151.123456789, -33.123456789],
+            [150.123456789, -33.123456789],
+            [150.123456789, -34.123456789]
+        ]
+    ];
+    t.deepEqual(_.clean({
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: coordinates
+                }
+            }
+        ]
+    }).features[0].geometry.coordinates, coordinates, 'polygon precision unchanged');
+
     t.end();
 });

@@ -9,6 +9,7 @@ const moment = require('moment-timezone');
 const rewind = require('@mapbox/geojson-rewind');
 const _ = require('lodash');
 const polygonClipping = require('polygon-clipping');
+const gp = require('geojson-precision');
 
 const defaultOptions = {
     avoidGeometryCollections: false,
@@ -75,8 +76,13 @@ module.exports = {
             cleanFeatures = _.sortBy(cleanFeatures, [sortBy[options.sort]]);
         }
 
-        // create final GeoJSON with winding order enforced
-        const cleanedGeoJSON = rewind(turf.featureCollection(cleanFeatures));
+        // create final GeoJSON with winding order enforced, and
+        // limited coordinate precision for points (polygons are left in tact to avoid
+        // creating invalid geometries)
+        const cleanedGeoJSON = gp(rewind(turf.featureCollection(cleanFeatures)), 4, 4, {
+            skipLineString: true,
+            skipPolygon: true
+        });
 
         return cleanedGeoJSON;
     },

@@ -17,7 +17,7 @@
     "@turf/buffer": "^5.1.5",
     "@turf/helpers": "^5.1.5",
     "@turf/meta": "^5.2.0",
-    "geojson-precision": "^0.4.0",
+    "geojson-precision": "andrewharvey/geojson-precision#selective-precision",
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.14",

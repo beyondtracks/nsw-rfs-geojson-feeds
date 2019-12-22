@@ -29,9 +29,7 @@ Since some downstream applications can have trouble ingesting GeoJSON data with 
 
 ## Coordinate Precision
 
-Although extra coordinate precision can help retain geometry shape even beyond the capture precision, the upstream feed uses 14 decimal places. Practically fire extents or geometry shape won't be more than 10m in accuracy so limiting to 4 decimal places will suffice.
-
-*Temporarily disabled due to issues where small valid polygons became invalid after truncation*
+Although extra coordinate precision can help retain geometry shape even beyond the capture precision, the upstream feed uses 14 decimal places, which is more than reasonable precision for Point features. Point geometry coordinates are limited to 4 decimal places for ~10m resolution, polygon geometry coordinates are unchanged to prevent creating invalid polygons.
 
 ## Overloaded Description
 
