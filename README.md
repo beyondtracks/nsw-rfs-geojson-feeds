@@ -105,7 +105,7 @@ guid | String | A globally unique identifier for this incident. Usually it is a 
 pub-date | String | Datetime in ISO8601 of when the incident was first published | `2018-01-05T23:41:00+11:00`
 updated | String | Datetime in ISO8601 of when the incident details were last updated | `2018-01-06T10:41:00+11:00`
 responsible-agency | String | The name of the agency responsible for responding to the incident | `Rural Fire Service`, `NSW National Parks and Wildlife Service`
-size | String | The ground area which the incident affects | `2790 ha`
+size | String | The ground area which the incident affects in hectares | `2790`
 type | String | The type of incident, see [#incident-type](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson#incident-type) | `bush-fire`, `medical`, `grass-fire`
 fire | boolean | Indicates if this this incident a fire (`true`) or not (`false`) | `true`, `false`
 council-area | String | Short name of the council area the incident falls in | `Wollongong`
