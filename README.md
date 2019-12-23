@@ -35,6 +35,10 @@ Although extra coordinate precision can help retain geometry shape even beyond t
 
 The upstream feed overloads properties into the `description` field in the format `KEY: Value <br />KEY: Value`. These are exploded out to make them easier to machine read in applications. The original overloaded description is dropped from the output.
 
+Some properties are parsed:
+
+- fire size is converted from a string "10 ha" into a numeric value with units in hectares
+
 ## Machine Readable Schema
 
 Within [schema/](https://github.com/beyondtracks/nsw-rfs-majorincidents-geojson/tree/master/schema) are JSON files containing the values and descriptions for Status, Alert Level and Incident Type. These can be used within web applications to provide users more information about what these terms mean.

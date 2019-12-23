@@ -1,6 +1,18 @@
 const test = require('tape'),
     _ = require('./');
 
+test('cleanProperties', (t) => {
+    t.deepEqual(_._cleanProperties({}), {}, 'empty properties');
+    t.deepEqual(_._cleanProperties({ size: null }), { size: null }, 'null size');
+    t.deepEqual(_._cleanProperties({ size: 10 }), { size: 10 }, 'numeric size');
+    t.deepEqual(_._cleanProperties({ size: '10' }), { size: 10 }, 'numeric size as string');
+    t.deepEqual(_._cleanProperties({ size: '10ha' }), { size: 10 }, '10ha');
+    t.deepEqual(_._cleanProperties({ size: '10 ha' }), { size: 10 }, '10 ha');
+    t.deepEqual(_._cleanProperties({ size: '10.5 ha' }), { size: 10.5 }, 'float size');
+
+    t.end();
+});
+
 test('uniformType', (t) => {
     t.true(_._uniformType([]), 'empty array');
     t.true(_._uniformType([

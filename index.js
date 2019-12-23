@@ -25,7 +25,8 @@ module.exports = {
      *   - Unpack overloaded description field
      *   - Use ISO8601 formatted datetimes
      *   - Enforce GeoJSON winding order
-     *   - Union mulitple Polygons within a single GeometryCollection due to artificial shared borders.
+     *   - Union mulitple Polygons within a single GeometryCollection due to artificial shared borders
+     *   - Covert size from a string to a number (in hectares)
      *
      * @param {Object} geojson NSW RFS Major Incidents Upstream Feed as a GeoJSON Object
      * @param {Object} [options]
@@ -330,6 +331,17 @@ module.exports = {
         if (properties.description) {
             Object.assign(properties, this._unpackDescription(properties.description));
             delete properties.description; // remove original description string
+        }
+
+        if (properties.size) {
+            if (typeof properties.size === 'string') {
+                const area = Number(properties.size.replace(/\s*ha\s*$/i, ''));
+                if (isNaN(area)) {
+                    delete properties.size;
+                } else {
+                    properties.size = area;
+                }
+            }
         }
 
         /* use a simplified schema removing some keys and using identifiers rather than full names for some values */
