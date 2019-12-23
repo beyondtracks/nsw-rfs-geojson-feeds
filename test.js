@@ -3,12 +3,12 @@ const test = require('tape'),
 
 test('cleanProperties', (t) => {
     t.deepEqual(_._cleanProperties({}), {}, 'empty properties');
-    t.deepEqual(_._cleanProperties({ size: null }), { size: null }, 'null size');
-    t.deepEqual(_._cleanProperties({ size: 10 }), { size: 10 }, 'numeric size');
-    t.deepEqual(_._cleanProperties({ size: '10' }), { size: 10 }, 'numeric size as string');
-    t.deepEqual(_._cleanProperties({ size: '10ha' }), { size: 10 }, '10ha');
-    t.deepEqual(_._cleanProperties({ size: '10 ha' }), { size: 10 }, '10 ha');
-    t.deepEqual(_._cleanProperties({ size: '10.5 ha' }), { size: 10.5 }, 'float size');
+    t.deepEqual(_._cleanProperties({size: null}), {size: null}, 'null size');
+    t.deepEqual(_._cleanProperties({size: 10}), {size: 10}, 'numeric size');
+    t.deepEqual(_._cleanProperties({size: '10'}), {size: 10}, 'numeric size as string');
+    t.deepEqual(_._cleanProperties({size: '10ha'}), {size: 10}, '10ha');
+    t.deepEqual(_._cleanProperties({size: '10 ha'}), {size: 10}, '10 ha');
+    t.deepEqual(_._cleanProperties({size: '10.5 ha'}), {size: 10.5}, 'float size');
 
     t.end();
 });
