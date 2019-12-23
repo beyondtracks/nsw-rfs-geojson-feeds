@@ -6,8 +6,8 @@ You can either:
 
 1. build this application into your own pipeline (using either the CLI program or the NodeJS library contained) or,
 2. use the hosted processed feed of which there are two variants
-  1. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson) [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson).
-  2. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) processed with the `--avoid-geometrycollections` option for QGIS compatibility.
+    1. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson) [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson).
+    2. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) processed with the `--avoid-geometrycollections` option for QGIS compatibility.
 
 An archive of historical feed data is kept as a Git repository at [https://github.com/beyondtracks/nsw-rfs-majorincidents-archive](https://github.com/beyondtracks/nsw-rfs-majorincidents-archive) together with a time series visualisation at [https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries](https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries).
 
