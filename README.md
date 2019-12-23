@@ -2,9 +2,14 @@
 
 The NSW Rural Fire Service (RFS) [publishes a GeoJSON feed of major incidents](http://www.rfs.nsw.gov.au/news-and-media/stay-up-to-date/feeds), this project aims to make that feed more developer friendly.
 
-You can either build this application into your own pipeline or use the hosted URL at https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson (no service availability guarantees), [preview it at geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson).
+You can either:
 
-An archive of historical feed data is at [https://github.com/beyondtracks/nsw-rfs-majorincidents-archive](https://github.com/beyondtracks/nsw-rfs-majorincidents-archive) and a time series visualisation at [https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries](https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries).
+1. build this application into your own pipeline (using either the CLI program or the NodeJS library contained) or,
+2. use the hosted processed feed of which there are two variants
+  1. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson) [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson).
+  2. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) processed with the `--avoid-geometrycollections` option for QGIS compatibility.
+
+An archive of historical feed data is kept as a Git repository at [https://github.com/beyondtracks/nsw-rfs-majorincidents-archive](https://github.com/beyondtracks/nsw-rfs-majorincidents-archive) together with a time series visualisation at [https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries](https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries).
 
 _NSW RFS Current Incidents are © State of New South Wales (NSW Rural Fire Service). For current information go to www.rfs.nsw.gov.au. Licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)._
 
