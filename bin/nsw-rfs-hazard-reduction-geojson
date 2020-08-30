@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const request = require('request');
+const argv = require('minimist')(process.argv.slice(2), { boolean: ['pretty-print'] });
+const NSWRFSHazardReduction = require('../nsw-rfs-hazard-reduction');
+
+if (argv._.length < 1) {
+    throw 'Usage: nsw-rfs-hazard-reduction-geojson <nsw-rfs-hazardreduction.geojson>';
+    process.exit(1);
+}
+const upstreamFeedURL = 'https://www.rfs.nsw.gov.au/funnelback/hr-map-data?collection=nsw-rfs-hazard-xml-new';
+
+const outputFile = argv._.length === 2 ? argv._[1] : argv._[0];
+const inputFile = argv._.length === 2 ? argv._[0] : null;
+
+if (inputFile) {
+    // process local downloaded file
+    processFeed(fs.readFileSync(inputFile === '-' ? '/dev/stdin' : inputFile));
+} else {
+    // download from upstream
+    request(upstreamFeedURL, function (err, res, body) {
+
+        // check for any errors in the HTTP request
+        if (err || !res || res.statusCode !== 200) {
+            if (err) console.error(err);
+            if (res) console.error('Status Code: ' + res.statusCode);
+            throw 'Error retrieving feed';
+            process.exit(1);
+        }
+
+        processFeed(body);
+    });
+}
+
+function processFeed(feed) {
+    // parse the upstream GeoJSON
+    var json;
+    try {
+        json = JSON.parse(feed);
+    } catch (Error) {
+        throw 'Error parsing JSON feed';
+        process.exit(1);
+    }
+
+    // convert the feed to GeoJSON
+    const geojson = NSWRFSHazardReduction.toGeoJSON(json, { });
+
+    const outputString = argv['pretty-print'] ? JSON.stringify(geojson, null, 2) : JSON.stringify(geojson);
+
+    // save cleaned GeoJSON to stdout or a file
+    if (outputFile === '-') {
+        process.stdout.write(outputString);
+    } else {
+        fs.writeFileSync(outputFile, outputString, 'utf8');
+    }
+}
