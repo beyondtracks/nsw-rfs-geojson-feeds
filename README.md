@@ -11,7 +11,7 @@ You can either:
 
 An archive of historical feed data is kept as a Git repository at [https://github.com/beyondtracks/nsw-rfs-majorincidents-archive](https://github.com/beyondtracks/nsw-rfs-majorincidents-archive) together with a time series visualisation at [https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries](https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries).
 
-_NSW RFS Current Incidents are © State of New South Wales (NSW Rural Fire Service). For current information go to www.rfs.nsw.gov.au. Licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)._
+_NSW RFS Current Incidents and Hazard Reduction data is © State of New South Wales (NSW Rural Fire Service). For current information go to www.rfs.nsw.gov.au. Licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0)._
 
 ## Where is it used?
 
