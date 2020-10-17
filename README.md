@@ -37,7 +37,7 @@ This will download the upstream feeds, process them and save the resulting GeoJS
 To combine the two GeoJSON files into a single one you could use either of
 
 ```sh
-    jq --compact-output --slurp '{type: "FeatureCollection", features: .[].features}' nsw-rfs-majorincidents.geojson nsw-rfs-hazardreduction.geojson > nsw-rfs.geojson
+    jq --compact-output --slurp '{type: "FeatureCollection", features: (.[0].features + .[1].features)}' nsw-rfs-majorincidents.geojson nsw-rfs-hazardreduction.geojson > nsw-rfs.geojson
 ```
 
 ```sh
