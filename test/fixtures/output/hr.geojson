@@ -7,11 +7,11 @@
       "properties": {
         "leadAgency": "Fire + Rescue NSW (FRNSW",
         "supportingAgencies": "",
-        "size": "1.113 ha",
-        "title": "Bantry Bay Rd/ Scouts HAZARD REDUCTION",
+        "size": 1.113,
+        "title": "Bantry Bay Rd/ Scouts",
         "tenure": "Council",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -73,11 +73,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Council",
-        "size": "13.84 ha",
-        "title": "Glen Oak Burn HAZARD REDUCTION",
+        "size": 13.84,
+        "title": "Glen Oak Burn",
         "tenure": "Local Govt",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -131,11 +131,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "25.60 ha",
-        "title": "Bloomfield #1 HAZARD REDUCTION",
+        "size": 25.6,
+        "title": "Bloomfield #1",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -185,11 +185,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "30.55 ha",
-        "title": "Bloomfield #2 HAZARD REDUCTION",
+        "size": 30.55,
+        "title": "Bloomfield #2",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -315,11 +315,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "2.91 ha",
-        "title": "Ben Bullen Reserve Lmz HAZARD REDUCTION",
+        "size": 2.91,
+        "title": "Ben Bullen Reserve Lmz",
         "tenure": "Crown Land",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -373,11 +373,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "0.35 ha",
-        "title": "Seven Mile Beach Road Broken Head HAZARD REDUCTION",
+        "size": 0.35,
+        "title": "Seven Mile Beach Road Broken Head",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -443,11 +443,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "0.89 ha",
-        "title": "Seven Mile Beach Road Broken Head HAZARD REDUCTION",
+        "size": 0.89,
+        "title": "Seven Mile Beach Road Broken Head",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -509,11 +509,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "1.15 ha",
-        "title": "Broken Head Reserve Road Broken Head HAZARD REDUCTION",
+        "size": 1.15,
+        "title": "Broken Head Reserve Road Broken Head",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -555,11 +555,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "6.67 ha",
-        "title": "Cauchi Rozmanec HAZARD REDUCTION",
+        "size": 6.67,
+        "title": "Cauchi Rozmanec",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -737,11 +737,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "0.66 ha",
-        "title": "Kirkwood St - Bantry Reserve Seaforth HAZARD REDUCTION",
+        "size": 0.66,
+        "title": "Kirkwood St - Bantry Reserve Seaforth",
         "tenure": "Local Govt, Private",
-        "startDate": "10/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -811,11 +811,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "5.05 ha",
-        "title": "Forestville Sfaz 3 HAZARD REDUCTION",
+        "size": 5.05,
+        "title": "Forestville Sfaz 3",
         "tenure": "Local Govt",
-        "startDate": "10/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -913,11 +913,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "14.72 ha",
-        "title": "Norah Headb Complex HAZARD REDUCTION",
+        "size": 14.72,
+        "title": "Norah Headb Complex",
         "tenure": "Crown Land",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1091,11 +1091,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "0.19 ha",
-        "title": "Great Western Highway HAZARD REDUCTION",
+        "size": 0.19,
+        "title": "Great Western Highway",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1149,11 +1149,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "1.08 ha",
-        "title": "Great Western Highway HAZARD REDUCTION",
+        "size": 1.08,
+        "title": "Great Western Highway",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1243,11 +1243,11 @@
       "properties": {
         "leadAgency": "National Parks and Wildl",
         "supportingAgencies": "",
-        "size": "0.00 ha",
-        "title": "Abaroo And Sebastapol HAZARD REDUCTION",
+        "size": 0,
+        "title": "Abaroo And Sebastapol",
         "tenure": "Crown Land, National Park, Other",
-        "startDate": "10/10/2020",
-        "endDate": "12/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-12"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1589,11 +1589,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "0.15 ha",
-        "title": "Great Western Highway HAZARD REDUCTION",
+        "size": 0.15,
+        "title": "Great Western Highway",
         "tenure": "Private",
-        "startDate": "10/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-10",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1671,11 +1671,11 @@
       "properties": {
         "leadAgency": "National Parks and Wildl",
         "supportingAgencies": "",
-        "size": "1.30 ha",
-        "title": "Ironbark HAZARD REDUCTION",
+        "size": 1.3,
+        "title": "Ironbark",
         "tenure": "National Park",
-        "startDate": "9/10/2020",
-        "endDate": "14/10/2020"
+        "startDate": "2020-10-09",
+        "endDate": "2020-10-14"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -1877,11 +1877,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "2.77 ha",
-        "title": "Mustons Road HAZARD REDUCTION",
+        "size": 2.77,
+        "title": "Mustons Road",
         "tenure": "Private",
-        "startDate": "11/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-11",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2007,11 +2007,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "NSW Rural Fire Service State Mitigation Service, Private",
-        "size": "12.88 ha",
-        "title": "Cornerstone HAZARD REDUCTION",
+        "size": 12.88,
+        "title": "Cornerstone",
         "tenure": "Crown Land",
-        "startDate": "9/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-09",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2133,11 +2133,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "NSW Rural Fire Service State Mitigation Service, Private",
-        "size": "18.73 ha",
-        "title": "Cornerstone HAZARD REDUCTION",
+        "size": 18.73,
+        "title": "Cornerstone",
         "tenure": "Crown Land",
-        "startDate": "9/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-09",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2239,11 +2239,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "3.11 ha",
-        "title": "White Rd Homeleigh HAZARD REDUCTION",
+        "size": 3.11,
+        "title": "White Rd Homeleigh",
         "tenure": "Private",
-        "startDate": "11/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-11",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2325,11 +2325,11 @@
       "properties": {
         "leadAgency": "National Parks and Wildl",
         "supportingAgencies": "",
-        "size": "16.44 ha",
-        "title": "Belford East 1 HAZARD REDUCTION",
+        "size": 16.44,
+        "title": "Belford East 1",
         "tenure": "National Park, Other",
-        "startDate": "9/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-09",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2475,11 +2475,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "NSW Rural Fire Service State Mitigation Service, Private",
-        "size": "11.31 ha",
-        "title": "Prentice HAZARD REDUCTION",
+        "size": 11.31,
+        "title": "Prentice",
         "tenure": "Private",
-        "startDate": "11/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-11",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2865,11 +2865,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "0.52 ha",
-        "title": "Smith Lane HAZARD REDUCTION",
+        "size": 0.52,
+        "title": "Smith Lane",
         "tenure": "Private",
-        "startDate": "11/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-11",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2923,11 +2923,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "0.20 ha",
-        "title": "Smith Lane HAZARD REDUCTION",
+        "size": 0.2,
+        "title": "Smith Lane",
         "tenure": "Private",
-        "startDate": "11/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-11",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -2977,11 +2977,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Private",
-        "size": "0.17 ha",
-        "title": "Smith Lane HAZARD REDUCTION",
+        "size": 0.17,
+        "title": "Smith Lane",
         "tenure": "Private",
-        "startDate": "11/10/2020",
-        "endDate": "11/10/2020"
+        "startDate": "2020-10-11",
+        "endDate": "2020-10-11"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3039,11 +3039,11 @@
       "properties": {
         "leadAgency": "Private",
         "supportingAgencies": "",
-        "size": "142.99 ha",
-        "title": "Redgroves (Sma) HAZARD REDUCTION",
+        "size": 142.99,
+        "title": "Redgroves (Sma)",
         "tenure": "Commonwealth",
-        "startDate": "12/10/2020",
-        "endDate": "12/10/2020"
+        "startDate": "2020-10-12",
+        "endDate": "2020-10-12"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3109,11 +3109,11 @@
       "properties": {
         "leadAgency": "National Parks and Wildl",
         "supportingAgencies": "",
-        "size": "66.09 ha",
-        "title": "Caravan Trail HAZARD REDUCTION",
+        "size": 66.09,
+        "title": "Caravan Trail",
         "tenure": "National Park",
-        "startDate": "8/10/2020",
-        "endDate": "9/10/2020"
+        "startDate": "2020-10-08",
+        "endDate": "2020-10-09"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3379,11 +3379,11 @@
       "properties": {
         "leadAgency": "Private",
         "supportingAgencies": "",
-        "size": "109.10 ha",
-        "title": "Sma-Redgroves HAZARD REDUCTION",
+        "size": 109.1,
+        "title": "Sma-Redgroves",
         "tenure": "Commonwealth",
-        "startDate": "12/10/2020",
-        "endDate": "22/10/2020"
+        "startDate": "2020-10-12",
+        "endDate": "2020-10-22"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3441,11 +3441,11 @@
       "properties": {
         "leadAgency": "Private",
         "supportingAgencies": "",
-        "size": "149.58 ha",
-        "title": "Sma-Redgroves HAZARD REDUCTION",
+        "size": 149.58,
+        "title": "Sma-Redgroves",
         "tenure": "Commonwealth",
-        "startDate": "12/10/2020",
-        "endDate": "22/10/2020"
+        "startDate": "2020-10-12",
+        "endDate": "2020-10-22"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3507,11 +3507,11 @@
       "properties": {
         "leadAgency": "Forestry Corporation NSW",
         "supportingAgencies": "",
-        "size": "2463.99 ha",
-        "title": "Lansdowne/Coopernook HAZARD REDUCTION",
+        "size": 2463.99,
+        "title": "Lansdowne/Coopernook",
         "tenure": "Forestry",
-        "startDate": "12/10/2020",
-        "endDate": "19/10/2020"
+        "startDate": "2020-10-12",
+        "endDate": "2020-10-19"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -3805,11 +3805,11 @@
       "properties": {
         "leadAgency": "National Parks and Wildl",
         "supportingAgencies": "Fire & Rescue NSW, NSW Rural Fire Service, Private",
-        "size": "148.94 ha",
-        "title": "Wfd - Bulls Camp HAZARD REDUCTION",
+        "size": 148.94,
+        "title": "Wfd - Bulls Camp",
         "tenure": "Local Govt, National Park, Private",
-        "startDate": "7/10/2020",
-        "endDate": "9/10/2020"
+        "startDate": "2020-10-07",
+        "endDate": "2020-10-09"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -8087,11 +8087,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "NSW Rural Fire Service State Mitigation Service, Private",
-        "size": "5.25 ha",
-        "title": "Wongarbon Silo Sfaz HAZARD REDUCTION",
+        "size": 5.25,
+        "title": "Wongarbon Silo Sfaz",
         "tenure": "Crown Land",
-        "startDate": "14/10/2020",
-        "endDate": "18/10/2020"
+        "startDate": "2020-10-14",
+        "endDate": "2020-10-18"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -8149,11 +8149,11 @@
       "properties": {
         "leadAgency": "National Parks and Wildl",
         "supportingAgencies": "",
-        "size": "64.447 ha",
-        "title": "The Landings Creek HAZARD REDUCTION",
+        "size": 64.447,
+        "title": "The Landings Creek",
         "tenure": "National Park",
-        "startDate": "15/10/2020",
-        "endDate": "18/10/2020"
+        "startDate": "2020-10-15",
+        "endDate": "2020-10-18"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -8303,11 +8303,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Council, NSW Rural Fire Service State Mitigation Service",
-        "size": "8.24 ha",
-        "title": "Moama Reserve Off River Park Drive / Winbi Ave HAZARD REDUCTION",
+        "size": 8.24,
+        "title": "Moama Reserve Off River Park Drive / Winbi Ave",
         "tenure": "Local Govt",
-        "startDate": "1/10/2020",
-        "endDate": "30/04/2021"
+        "startDate": "2020-10-01",
+        "endDate": "2021-04-30"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -8565,11 +8565,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "NSW Rural Fire Service State Mitigation Service, Private",
-        "size": "5.36 ha",
-        "title": "Moree Boolooroo Weir HAZARD REDUCTION",
+        "size": 5.36,
+        "title": "Moree Boolooroo Weir",
         "tenure": "Local Govt, Private",
-        "startDate": "1/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-01",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -8899,11 +8899,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "NSW Rural Fire Service State Mitigation Service, Private",
-        "size": "22.60 ha",
-        "title": "Moree Boolooroo Weir HAZARD REDUCTION",
+        "size": 22.6,
+        "title": "Moree Boolooroo Weir",
         "tenure": "Local Govt, Crown Land",
-        "startDate": "1/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-01",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -9049,11 +9049,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "NSW Rural Fire Service State Mitigation Service",
-        "size": "1.49 ha",
-        "title": "Gwydirfield Road HAZARD REDUCTION",
+        "size": 1.49,
+        "title": "Gwydirfield Road",
         "tenure": "Crown Land",
-        "startDate": "1/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-01",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -9127,11 +9127,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "Council",
-        "size": "3.01 ha",
-        "title": "Clipper Reserve HAZARD REDUCTION",
+        "size": 3.01,
+        "title": "Clipper Reserve",
         "tenure": "Local Govt",
-        "startDate": "1/10/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-10-01",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
@@ -9189,11 +9189,11 @@
       "properties": {
         "leadAgency": "NSW Rural Fire Service",
         "supportingAgencies": "",
-        "size": "16.00 ha",
-        "title": "Eden Sfaz - Botany St HAZARD REDUCTION",
+        "size": 16,
+        "title": "Eden Sfaz - Botany St",
         "tenure": "Crown Land",
-        "startDate": "30/09/2020",
-        "endDate": "10/10/2020"
+        "startDate": "2020-09-30",
+        "endDate": "2020-10-10"
       },
       "geometry": {
         "type": "MultiPolygon",
