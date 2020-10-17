@@ -30,6 +30,7 @@ module.exports = {
         type: 'Feature',
         id: result.guarReference,
         properties: {
+          hrNotice: true, // flag this as a hazard reduction notice so that when combined with current incidents we can tell apart planned from actual
           leadAgency: result.leadAgency,
           supportingAgencies: result.supportingAgencies,
           size: self._cleanSize(result.size),
