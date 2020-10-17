@@ -43,8 +43,10 @@ Alternatively if you've pre-downloaded an upstream feed you can run:
   - `--sort=<original|guid|pubdate>` the default is `original` which retains the original sort order, sorting by `guid` uses ascending order and `pubdate` uses chronological order
 
 ## Hosted Feeds
-1. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson) - [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson).
-2. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) - [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) - processed with the `--avoid-geometrycollections` option for QGIS compatibility.
+
+1. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson) - [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents.geojson)
+2. [https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) - [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-majorincidents-nogeometrycollections.geojson) - processed with the `--avoid-geometrycollections` option for QGIS compatibility
+3. [https://www.beyondtracks.com/contrib/nsw-rfs-hazardreduction.geojson](https://www.beyondtracks.com/contrib/nsw-rfs-hazardreduction.geojson) - [preview with geojson.io](http://geojson.io/#data=data:text/x-url,https://www.beyondtracks.com/contrib/nsw-rfs-hazardreduction.geojson)
 
 An archive of historical feed data is kept as a Git repository at [https://github.com/beyondtracks/nsw-rfs-majorincidents-archive](https://github.com/beyondtracks/nsw-rfs-majorincidents-archive) together with a time series visualisation at [https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries](https://github.com/beyondtracks/nsw-rfs-majorincidents-timeseries).
 
