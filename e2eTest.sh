@@ -19,5 +19,5 @@ echo "Test 4: download and process hazard reduction"
 geojsonhint output/nsw-rfs-hazard-reduction.geojson
 
 echo "Test 5: input fixture hazard reduction"
-./bin/nsw-rfs-hazard-reduction-geojson --pretty-print test/fixtures/input/hr.json - | diff - test/fixtures/output/hr.geojson
+./bin/nsw-rfs-hazard-reduction-geojson --pretty-print test/fixtures/input/hr.json - | diff test/fixtures/output/hr.geojson -
 
