@@ -19,6 +19,7 @@ if (inputFile) {
   processFeed(fs.readFileSync(inputFile === '-' ? '/dev/stdin' : inputFile))
 } else {
   // download from upstream
+  console.error('Downloading fresh feed')
   request(upstreamFeedURL, function (err, res, body) {
 
     // check for any errors in the HTTP request
