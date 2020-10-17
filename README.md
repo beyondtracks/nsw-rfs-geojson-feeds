@@ -21,19 +21,35 @@ Alternativly command line programs are provided for other environments.
 
 Install the Node dependencies with:
 
+```sh
     yarn install
+```
 
 Run the command line programs with:
 
+```sh
     ./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson
     ./bin/nsw-rfs-hazardreduction-geojson nsw-rfs-hazardreduction.geojson
+```
 
 This will download the upstream feeds, process them and save the resulting GeoJSON files.
 
+To combine the two GeoJSON files into a single one you could use either of
+
+```sh
+    jq --compact-output --slurp '{type: "FeatureCollection", features: .[].features}' nsw-rfs-majorincidents.geojson nsw-rfs-hazardreduction.geojson > nsw-rfs.geojson
+```
+
+```sh
+    ogr2ogr nsw-rfs.geojson nsw-rfs-majorincidents.geojson nsw-rfs-hazardreduction.geojson
+```
+
 Alternatively if you've pre-downloaded an upstream feed you can run:
 
+```sh
     ./bin/nsw-rfs-majorincidents-geojson upstream.json output.geojson
     ./bin/nsw-rfs-hazardreduction-geojson upstream.json output.geojson
+```
 
 ### Options
 
