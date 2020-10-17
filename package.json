@@ -19,6 +19,7 @@
     "@turf/meta": "^6.0.2",
     "geojson-precision": "andrewharvey/geojson-precision#selective-precision",
     "lodash": "^4.17.4",
+    "luxon": "^1.25.0",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.14",
     "polygon-clipping": "^0.15.1",
