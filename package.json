@@ -1,7 +1,7 @@
 {
   "name": "@beyondtracks/nsw-rfs-majorincidents-geojson",
   "version": "2.7.0",
-  "description": "Developer friendly NSW RFS Major Incidents and Hazard Reduction GeoJSON feeds",
+  "description": "Unofficial developer friendly NSW RFS Major Incidents and Hazard Reduction GeoJSON feeds",
   "main": "src/index.js",
   "author": "Andrew Harvey <andrew@alantgeo.com.au>",
   "license": "MIT",
