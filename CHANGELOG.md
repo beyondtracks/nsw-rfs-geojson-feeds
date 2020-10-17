@@ -1,3 +1,7 @@
+# 3.0.0
+
+* Add processing for hazard reduction feed
+
 # 2.7.0
 
 * Limit coordinate precision of points
