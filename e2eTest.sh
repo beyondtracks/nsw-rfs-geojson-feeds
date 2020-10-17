@@ -15,9 +15,9 @@ echo "Test 3: download and process major incidents --avoid-slivers"
 geojsonhint output/nsw-rfs-majorincidents-avoidslivers.geojson
 
 echo "Test 4: download and process hazard reduction"
-./bin/nsw-rfs-hazard-reduction-geojson --pretty-print output/nsw-rfs-hazard-reduction.geojson
-geojsonhint output/nsw-rfs-hazard-reduction.geojson
+./bin/nsw-rfs-hazardreduction-geojson --pretty-print output/nsw-rfs-hazardreduction.geojson
+geojsonhint output/nsw-rfs-hazardreduction.geojson
 
 echo "Test 5: input fixture hazard reduction"
-./bin/nsw-rfs-hazard-reduction-geojson --pretty-print test/fixtures/input/hr.json - | diff test/fixtures/output/hr.geojson -
+./bin/nsw-rfs-hazardreduction-geojson --pretty-print test/fixtures/input/hr.json - | diff test/fixtures/output/hr.geojson -
 

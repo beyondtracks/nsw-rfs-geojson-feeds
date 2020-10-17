@@ -26,14 +26,14 @@ Install the Node dependencies with:
 Run the command line programs with:
 
     ./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson
-    ./bin/nsw-rfs-hazard-reduction-geojson nsw-rfs-hazard-reduction.geojson
+    ./bin/nsw-rfs-hazardreduction-geojson nsw-rfs-hazardreduction.geojson
 
 This will download the upstream feeds, process them and save the resulting GeoJSON files.
 
 Alternatively if you've pre-downloaded an upstream feed you can run:
 
     ./bin/nsw-rfs-majorincidents-geojson upstream.json output.geojson
-    ./bin/nsw-rfs-hazard-reduction-geojson upstream.json output.geojson
+    ./bin/nsw-rfs-hazardreduction-geojson upstream.json output.geojson
 
 ### Options
 
