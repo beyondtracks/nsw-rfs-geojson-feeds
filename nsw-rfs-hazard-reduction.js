@@ -1,19 +1,11 @@
-const defaultOptions = {
-}
-
 module.exports = {
   /**
    * Converts the NSW RFS Hazard Reduction JSON feed to GeoJSON
    *
    * @param {Object} json NSW RFS Hazard Reduction Feed as a JSON Object
-   * @param {Object} [options]
    * @returns {Object} GeoJSON Object
    */
-  toGeoJSON(json, options) {
-    const self = this
-
-    options = Object.assign({}, defaultOptions, options)
-
+  toGeoJSON(json) {
     const features = json.results.map(result => {
       const polygons = result.polygons.map(polygon => {
         return [polygon

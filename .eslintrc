@@ -1,6 +1,0 @@
-{
-  "extends": "mourner",
-  "rules": {
-    "global-require": "off"
-  }
-}

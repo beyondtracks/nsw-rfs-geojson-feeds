@@ -8,7 +8,7 @@
   "repository": "github:beyondtracks/nsw-rfs-majorincidents-geojson",
   "scripts": {
     "test": "tape test.js",
-    "lint": "eslint index.js test.js",
+    "lint": "eslint bin/* index.js test.js nsw-rfs-hazard-reduction.js",
     "test-e2e": "./e2eTest.sh"
   },
   "dependencies": {
@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "eslint": "^7.11.0",
-    "eslint-config-mourner": "^3.0.0",
     "tape": "^5.0.1"
   }
 }
