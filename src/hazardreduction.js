@@ -1,4 +1,5 @@
 const { DateTime } = require('luxon')
+const rewind = require('@mapbox/geojson-rewind')
 
 module.exports = {
   /**
@@ -25,7 +26,7 @@ module.exports = {
           .filter(coordinates => coordinates.length)]
       })
 
-      return {
+      return rewind({
         type: 'Feature',
         id: result.guarReference,
         properties: {
@@ -41,7 +42,7 @@ module.exports = {
           type: result.geometryType,
           coordinates: polygons
         }
-      }
+      })
     })
 
     return {
