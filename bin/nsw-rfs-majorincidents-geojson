@@ -3,7 +3,7 @@
 const fs = require('fs')
 const request = require('request')
 const argv = require('minimist')(process.argv.slice(2), { boolean: ['pretty-print', 'avoid-geometrycollections', 'avoid-slivers'] })
-const NSWRFSMajorIncidentsGeoJSON = require('../')
+const NSWRFSMajorIncidentsGeoJSON = require('../src/majorincidents')
 
 if (argv._.length < 1) {
   console.error('Usage: nsw-rfs-majorincidents-geojson <nsw-rfs-majorincidents.geojson>')

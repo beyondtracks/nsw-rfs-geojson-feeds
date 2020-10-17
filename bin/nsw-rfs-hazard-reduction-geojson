@@ -3,7 +3,7 @@
 const fs = require('fs')
 const request = require('request')
 const argv = require('minimist')(process.argv.slice(2), { boolean: ['pretty-print'] })
-const NSWRFSHazardReduction = require('../nsw-rfs-hazard-reduction')
+const NSWRFSHazardReduction = require('../src/hazardreduction')
 
 if (argv._.length < 1) {
   console.error('Usage: nsw-rfs-hazard-reduction-geojson <nsw-rfs-hazardreduction.geojson>')

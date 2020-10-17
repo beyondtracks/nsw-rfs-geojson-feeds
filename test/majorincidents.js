@@ -1,5 +1,5 @@
 const test = require('tape'),
-  _ = require('./')
+  _ = require('../src/majorincidents')
 
 test('cleanProperties', (t) => {
   t.deepEqual(_._cleanProperties({}), {}, 'empty properties')
