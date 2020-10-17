@@ -9,7 +9,7 @@ test:
         - yarn install
         - yarn run lint
         - yarn run test
-        - yarn global add geojsonhint
+        - yarn global add @mapbox/geojsonhint
         - yarn run test-e2e
     artifacts:
         name: "nsw-rfs-majorincidents"
