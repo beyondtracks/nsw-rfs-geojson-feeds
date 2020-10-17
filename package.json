@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "author": "Andrew Harvey <andrew@alantgeo.com.au>",
   "license": "MIT",
-  "repository": "github:beyondtracks/nsw-rfs-majorincidents-geojson",
+  "repository": "gitlab:beyondtracks/nsw-rfs-majorincidents-geojson",
   "scripts": {
     "test": "tape test.js",
     "lint": "eslint bin/* src/*.js test/*.js",
