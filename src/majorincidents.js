@@ -3,7 +3,7 @@ const turf = {
   featureEach: require('@turf/meta').featureEach,
   feature: require('@turf/helpers').feature,
   featureCollection: require('@turf/helpers').featureCollection,
-  buffer: require('@turf/buffer').default
+  buffer: require('@turf/buffer')
 }
 const moment = require('moment-timezone')
 const rewind = require('@mapbox/geojson-rewind')
