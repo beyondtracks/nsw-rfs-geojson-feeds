@@ -12,14 +12,14 @@
     "test-e2e": "./e2eTest.sh"
   },
   "dependencies": {
-    "@mapbox/geojson-rewind": "^0.5.0",
+    "@mapbox/geojson-rewind": "^0.5.1",
     "@turf/area": "^6.3.0",
     "@turf/buffer": "^6.3.0",
     "@turf/helpers": "^6.3.0",
     "@turf/meta": "^6.3.0",
     "geojson-precision": "andrewharvey/geojson-precision#selective-precision",
     "lodash": "^4.17.21",
-    "luxon": "^1.26.0",
+    "luxon": "^1.27.0",
     "minimist": "^1.2.0",
     "moment-timezone": "^0.5.33",
     "polygon-clipping": "^0.15.3",
