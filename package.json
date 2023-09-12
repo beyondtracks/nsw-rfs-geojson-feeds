@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": "gitlab:beyondtracks/nsw-rfs-majorincidents-geojson",
   "scripts": {
-    "test": "tape test.js",
+    "test": "tape test/majorincidents.js",
     "lint": "eslint bin/* src/*.js test/*.js",
     "test-e2e": "./e2eTest.sh"
   },
