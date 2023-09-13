@@ -6,30 +6,40 @@ _NSW RFS Current Incidents and Hazard Reduction data is © State of New South Wa
 
 ## Where is it used?
 
-This project is used at [www.beyondtracks.com](https://www.beyondtracks.com) to provide information about bushfires and hazard reduction burns, appearing as alerts for affected walks and on the map.
+This project is used at [www.beyondtracks.com](https://www.beyondtracks.com) to provide information about bushfires and hazard reduction burns, appearing as alerts for affected walks and as [fire areas and markers on the map](https://www.beyondtracks.com/map/).
 
-## Project Structure
+## Usage as a library
 
-This project provides Node modules to build this processing into an existing Node script:
+```js
 
-  - `src/majorincidents.js`
-  - `src/hazardreduction.js`
+const NSWRFSHazardReduction = require('@beyondtracks/nsw-rfs-geojson-feeds').NSWRFSHazardReduction
+const NSWRFSMajorIncidentsGeoJSON = require('@beyondtracks/nsw-rfs-geojson-feeds').NSWRFSMajorIncidentsGeoJSON
 
-Alternativly command line programs are provided for other environments.
-
-## Usage
-
-Install the Node dependencies with:
-
-```sh
-    yarn install
+const geojson = NSWRFSHazardReduction.toGeoJSON(feed)
+const geojson = NSWRFSMajorIncidentsGeoJSON.clean(feed, {
+    avoidGeometryCollections: true,
+    avoidSlivers: true,
+    sort: 'original'
+})
 ```
 
-Run the command line programs with:
+## Usage as a CLI script
+
+Either install with yarn or npm.
 
 ```sh
-    ./bin/nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson
-    ./bin/nsw-rfs-hazardreduction-geojson nsw-rfs-hazardreduction.geojson
+    yarn global add @beyondtracks/nsw-rfs-majorincidents-geojson
+```
+
+```sh
+    npm install -g @beyondtracks/nsw-rfs-majorincidents-geojson
+```
+
+Then run the command line programs with:
+
+```sh
+    nsw-rfs-majorincidents-geojson nsw-rfs-majorincidents.geojson
+    nsw-rfs-hazardreduction-geojson nsw-rfs-hazardreduction.geojson
 ```
 
 This will download the upstream feeds, process them and save the resulting GeoJSON files.
@@ -44,11 +54,11 @@ To combine the two GeoJSON files into a single one you could use either of
     ogr2ogr nsw-rfs.geojson nsw-rfs-majorincidents.geojson nsw-rfs-hazardreduction.geojson
 ```
 
-Alternatively if you've pre-downloaded an upstream feed you can run:
+Alternatively if you've pre-downloaded an upstream feed and you'd like to process it you can run:
 
 ```sh
-    ./bin/nsw-rfs-majorincidents-geojson upstream.json output.geojson
-    ./bin/nsw-rfs-hazardreduction-geojson upstream.json output.geojson
+    nsw-rfs-majorincidents-geojson upstream.json output.geojson
+    nsw-rfs-hazardreduction-geojson upstream.json output.geojson
 ```
 
 ### Options
