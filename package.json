@@ -1,6 +1,6 @@
 {
   "name": "@beyondtracks/nsw-rfs-geojson-feeds",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Unofficial developer friendly NSW RFS Major Incidents and Hazard Reduction GeoJSON feeds",
   "homepage": "https://gitlab.com/beyondtracks/nsw-rfs-geojson-feeds",
   "main": "src/index.js",

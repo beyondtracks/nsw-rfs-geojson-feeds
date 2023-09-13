@@ -1,3 +1,7 @@
+# 4.0.1
+
+* Package installs executable scripts: `nsw-rfs-hazardreduction-geojson`, `nsw-rfs-majorincidents-geojson`
+
 # 4.0.0
 
 * Package renamed to `@beyondtracks/nsw-rfs-geojson-feeds`.
