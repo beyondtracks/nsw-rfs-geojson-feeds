@@ -28,11 +28,11 @@ const geojson = NSWRFSMajorIncidentsGeoJSON.clean(feed, {
 Either install with yarn or npm.
 
 ```sh
-    yarn global add @beyondtracks/nsw-rfs-majorincidents-geojson
+    yarn global add @beyondtracks/nsw-rfs-geojson-feeds
 ```
 
 ```sh
-    npm install -g @beyondtracks/nsw-rfs-majorincidents-geojson
+    npm install -g @beyondtracks/nsw-rfs-geojson-feeds
 ```
 
 Then run the command line programs with:
