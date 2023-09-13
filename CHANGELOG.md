@@ -1,3 +1,7 @@
+# 4.0.0
+
+* Package renamed to `@beyondtracks/nsw-rfs-geojson-feeds`.
+
 # 3.0.0
 
 * Add processing for hazard reduction feed
